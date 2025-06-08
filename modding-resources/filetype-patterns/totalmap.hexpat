@@ -19,7 +19,7 @@ namespace Riverworld {
     struct MapCell {
         le u8 depth [[color("F45B69"), comment("The depth of the cell's bottom-right vertex (0 = highest position, 255 = lowest)")]];
         le u8 texture_index [[color("F4D06F"), comment("The index of the texture from the MAPLAND list in the LEVEL*.ASM file to assign to this cell")]];
-        u8 [[hidden, comment("Unknown field beleived to be precomputed lightmap data for the minimap")]];
+        le u8 [[hidden, comment("Unknown field believed to be precomputed lightmap data for the minimap")]];
         MapCellFlags flags [[color("9DD9D2"), comment("The flags defining the behavior of the map cell")]];
     };
     

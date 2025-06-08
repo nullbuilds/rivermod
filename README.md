@@ -1,6 +1,6 @@
 # Rivermod
 
-Modding tools for the 1998 strategy game, [Riverworld].
+Modding tools and resources for the 1998 strategy game, [Riverworld].
 
 ## Modding resources
 

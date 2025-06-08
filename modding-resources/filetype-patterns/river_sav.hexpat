@@ -17,7 +17,7 @@ namespace Riverworld {
         @param string the raw save name string
     */
     fn _validate_save_name(str string) {
-        u32 string_length = std::string::length(string);
+        le u32 string_length = std::string::length(string);
         
         char last_character = string[string_length - 1];
         std::assert(last_character == 0, "The last byte of a save name must be null; was " + std::string::to_string(u8(last_character)));
@@ -31,8 +31,8 @@ namespace Riverworld {
     /**
         Structure representing a RIVER000.SAV file. Note: MAP00.SAV files use a different format.
     */
-    struct RiverSave {      
-        u32 [[highlight_hidden, comment("Unknown field; always appears to be 1")]];
+    struct RiverSave {
+        le u32 [[highlight_hidden, comment("Unknown field; always appears to be 1")]];
         
         le u32 save_name_length [[comment("The length in bytes of the save name including the null terminator")]];
         std::assert(save_name_length > 0, "A save name's length cannot be 0");
