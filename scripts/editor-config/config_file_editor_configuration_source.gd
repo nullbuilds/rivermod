@@ -19,12 +19,10 @@ func _init(config_file_path: String) -> void:
 func get_configuration(context: String, key: String, default: Variant = null) -> Variant:
 	var value: Variant = _config_file.get_value(context, key, default)
 	
-	if value:
-		return value
-	elif default:
+	if value == default:
 		set_configuration(context, key, default)
 	
-	return default
+	return value
 
 
 ## Sets the specificied configuration key to the given value.
