@@ -1,6 +1,6 @@
-## A basic singleton dependency inector.
 class_name Injector
 extends Object
+## A basic singleton dependency inector.
 
 var _class_instance_mapping: Dictionary[Object, Object] = {}
 var _binder: InjectionBinder = null

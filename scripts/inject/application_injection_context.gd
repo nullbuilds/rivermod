@@ -1,6 +1,6 @@
-## Provides the dependency injection configuration for the application.
 class_name ApplicationInjectionContext
 extends InjectionContext
+## Provides the dependency injection configuration for the application.
 
 const _EDITOR_CONFIG_FILE_PATH: String = "user://editor.cfg"
 

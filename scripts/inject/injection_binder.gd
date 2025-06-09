@@ -1,6 +1,6 @@
-## Defines the bindings for an injector.
 class_name InjectionBinder
 extends Object
+## Defines the bindings for an injector.
 
 var _class_provider_mapping: Dictionary[Object, Callable] = {}
 
