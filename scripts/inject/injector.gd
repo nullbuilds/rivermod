@@ -19,7 +19,7 @@ static func create(context: InjectionContext) -> Injector:
 
 ## Creates a new injector with the given binder.
 func _init(binder: InjectionBinder) -> void:
-	assert(binder, "binder must not be null")
+	assert(binder != null, "binder must not be null")
 	_binder = binder
 
 
@@ -29,7 +29,7 @@ func _init(binder: InjectionBinder) -> void:
 ## instance of itself into any field of the instanciated class typed as an
 ## Injector.
 func provide(clazz: Object) -> Object:
-	assert(clazz, "clazz must not be null")
+	assert(clazz != null, "clazz must not be null")
 	
 	if not _class_instance_mapping.has(clazz):
 		var instance: Object = _create_instance(clazz)
@@ -43,7 +43,7 @@ func _create_instance(clazz: Object) -> Object:
 	var instance: Object = null
 	
 	var provider: Callable = _binder.get_binding(clazz)
-	assert(provider, "Attempted to inject an instance of a class for which no provider exists")
+	assert(provider != null, "Attempted to inject an instance of a class for which no provider exists")
 	
 	instance = provider.call(self)
 	_inject_properties(instance)
@@ -54,8 +54,6 @@ func _create_instance(clazz: Object) -> Object:
 
 ## Injects properties into the given object.
 func _inject_properties(instance: Object) -> void:
-	assert(instance, "instance must not be null")
-	
 	var injector_class_name: String = get_script().get_global_name()
 	for property in instance.get_property_list():
 		if property.class_name == injector_class_name:

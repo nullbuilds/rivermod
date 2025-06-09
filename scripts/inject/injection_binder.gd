@@ -11,8 +11,8 @@ var _class_provider_mapping: Dictionary[Object, Callable] = {}
 ## If the injected class has a property named "_injector", the injector will
 ## inject itself directly into that variable after calling the provider.
 func bind(clazz: Object, provider: Callable) -> void:
-	assert(clazz, "clazz must not be null")
-	assert(provider, "provider must not be null")
+	assert(clazz != null, "clazz must not be null")
+	assert(provider != null, "provider must not be null")
 	_class_provider_mapping.set(clazz, provider)
 
 
