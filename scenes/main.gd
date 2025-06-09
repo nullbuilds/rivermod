@@ -1,6 +1,6 @@
-## The editor main scnee.
 class_name Main
 extends Node
+## The editor main scnee.
 
 var _injector: Injector = null
 

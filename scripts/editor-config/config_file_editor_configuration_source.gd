@@ -1,6 +1,6 @@
-## Obtains editor configuration settings from a file.
 class_name ConfigFileEditorConfigurationSource
 extends EditorConfigurationSource
+## Obtains editor configuration settings from a file.
 
 var _config_file: ConfigFile = ConfigFile.new()
 var _config_file_path: String = ""

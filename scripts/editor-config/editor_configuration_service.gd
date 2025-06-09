@@ -1,6 +1,6 @@
-## Service for providing access to editor configurations.
 class_name EditorConfigurationService
 extends Object
+## Service for providing access to editor configurations.
 
 const _EDITOR_CONTEXT: String = "editor"
 const _GAME_INSTALL_DIRECTORY_KEY: String = "game_install_directory"
