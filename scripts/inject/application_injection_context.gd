@@ -8,6 +8,12 @@ const _EDITOR_CONFIG_FILE_PATH: String = "user://editor.cfg"
 func configure_bindings(binder: InjectionBinder) -> void:
 	binder.bind(EditorConfigurationSource, _provide_editor_configuration_source)
 	binder.bind(EditorConfigurationService, _provide_editor_configuration_service)
+	binder.bind(GameFileSource, _provide_game_file_source)
+
+
+## Provides a GameFileSource instance.
+func _provide_game_file_source(injector: Injector) -> GameFileSource:
+	return InstallationGameFileSource.new(injector.provide(EditorConfigurationService))
 
 
 ## Provides an EditorConfigurationService instance.
