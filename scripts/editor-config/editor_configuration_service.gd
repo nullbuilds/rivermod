@@ -4,6 +4,7 @@ extends Object
 
 const _EDITOR_CONTEXT: String = "editor"
 const _GAME_INSTALL_DIRECTORY_KEY: String = "game_install_directory"
+const _EDITOR_GAME_DIRECTORY: String =  ".rivermod"
 
 var _editor_configuration_source: EditorConfigurationSource = null
 var _loaded: bool = false
@@ -17,7 +18,12 @@ func _init(editor_configuration_source: EditorConfigurationSource) -> void:
 
 ## Gets the game's install directory or empty if not set.
 func get_game_install_directory() -> String:
-	return _get_configuration(_EDITOR_CONTEXT, _GAME_INSTALL_DIRECTORY_KEY, "")
+	return _get_configuration(_EDITOR_CONTEXT, _GAME_INSTALL_DIRECTORY_KEY, "").simplify_path()
+
+
+## Returns the name of the editor's own directory in a game installation.
+func get_game_install_editor_directory() -> String:
+	return _EDITOR_GAME_DIRECTORY
 
 
 ## Sets the game's install directory.
