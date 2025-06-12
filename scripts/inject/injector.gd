@@ -1,8 +1,9 @@
 class_name Injector
 extends Object
-## A basic singleton dependency inector.
+## A basic singleton dependency inector. All operations are thread-safe.
 
 var _class_instance_mapping: Dictionary[Object, Object] = {}
+var _mutex: Mutex = Mutex.new()
 var _binder: InjectionBinder = null
 
 ## Creates a new injector from the given context.
@@ -31,9 +32,11 @@ func _init(binder: InjectionBinder) -> void:
 func provide(clazz: Object) -> Object:
 	assert(clazz != null, "clazz must not be null")
 	
+	_mutex.lock()
 	if not _class_instance_mapping.has(clazz):
 		var instance: Object = _create_instance(clazz)
 		_class_instance_mapping.set(clazz, instance)
+	_mutex.unlock()
 	
 	return _class_instance_mapping.get(clazz)
 
