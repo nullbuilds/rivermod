@@ -9,6 +9,12 @@ func configure_bindings(binder: InjectionBinder) -> void:
 	binder.bind(EditorConfigurationSource, _provide_editor_configuration_source)
 	binder.bind(EditorConfigurationService, _provide_editor_configuration_service)
 	binder.bind(GameFileSource, _provide_game_file_source)
+	binder.bind(GameSaveDataRepository, _provide_game_save_data_repository)
+
+
+## Provides a GameSaveDataRepository
+func _provide_game_save_data_repository(injector: Injector) -> GameSaveDataRepository:
+	return GameFileSourceSaveDataRepository.new(injector.provide(GameFileSource))
 
 
 ## Provides a GameFileSource instance.

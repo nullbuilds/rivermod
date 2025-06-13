@@ -2,6 +2,26 @@ class_name GameFileSource
 extends Object
 ## Abstract class for accessing game files.
 
+const _MAP_SAVE_FILE_PATTERN: String = "MAP0%d.SAV"
+const _DATA_SAVE_FILE_PATTERN: String = "RIVER0%d0.SAV"
+
+## Returns whether the given file path is one of the game's save files or not.
+static func is_save_file(path: String) -> bool:
+	return path.to_lower().ends_with(".sav")
+
+
+## Returns the file name for a slot's map save.
+static func get_map_save_file_name(slot: int) -> String:
+	assert(slot >= 0 and slot <= 9, "slot must be in the range [0, 9]")
+	return _MAP_SAVE_FILE_PATTERN % slot
+
+
+## Returns the file name for a slot's data save.
+static func get_data_save_file_name(slot: int) -> String:
+	assert(slot >= 0 and slot <= 9, "slot must be in the range [0, 9]")
+	return _DATA_SAVE_FILE_PATTERN % slot
+
+
 ## Returns if the given file exists.
 func has_file(_path: String) -> bool:
 	assert(false, "Not implemented")
