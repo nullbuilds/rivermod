@@ -23,34 +23,39 @@ static func get_data_save_file_name(slot: int) -> String:
 
 
 ## Returns if the given file exists.
-func has_file(_path: String) -> bool:
+@warning_ignore("unused_parameter")
+func has_file(path: String) -> bool:
 	assert(false, "Not implemented")
 	return false
 
 
 ## Returns the bytes of the given file or an empty array if it could not be
 ## read.
-func read_file(_path: String) -> PackedByteArray:
+@warning_ignore("unused_parameter")
+func read_file(path: String) -> PackedByteArray:
 	assert(false, "Not implemented")
 	return []
 
 
 ## Overwrites the given file with the provided bytes or creates the file if it
 ## doesn't exist.
-func write_file(_path: String, _bytes: PackedByteArray) -> Error:
+@warning_ignore("unused_parameter")
+func write_file(path: String, bytes: PackedByteArray) -> Error:
 	assert(false, "Not implemented")
 	return Error.OK
 
 
 ## Gets the last modified time of the file in seconds since the Unix epoch or -1
 ## if there was an error.
-func get_file_modified_time(_path: String) -> int:
+@warning_ignore("unused_parameter")
+func get_file_modified_time(path: String) -> int:
 	assert(false, "Not implemented")
 	return -1
 
 
 ## Deletes the given file.
-func delete_file(_path: String) -> Error:
+@warning_ignore("unused_parameter")
+func delete_file(path: String) -> Error:
 	assert(false, "Not implemented")
 	return Error.OK
 

@@ -10,7 +10,8 @@ func get_error() -> Error:
 
 ## Returns the save data for the given slot or null if no data exists for that
 ## slot.
-func get_save_data(_slot: int) -> GameSaveData:
+@warning_ignore("unused_parameter")
+func get_save_data(slot: int) -> GameSaveData:
 	assert(false, "Not implemented")
 	return null
 
@@ -18,6 +19,7 @@ func get_save_data(_slot: int) -> GameSaveData:
 ## Sets or orverwrites the save data for the given slot.
 ## 
 ## Note that modified time will not be set. Only the save contents.
-func set_save_data(_slot: int, _game_save_data: GameSaveData) -> Error:
+@warning_ignore("unused_parameter")
+func set_save_data(slot: int, game_save_data: GameSaveData) -> Error:
 	assert(false, "Not implemented")
 	return Error.OK
