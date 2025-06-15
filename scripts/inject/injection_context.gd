@@ -3,5 +3,6 @@ extends Object
 ## Helper for setting the bindings on an injector.
 
 ## Configures the provided binder.
-func configure_bindings(_binder: InjectionBinder) -> void:
+@warning_ignore("unused_parameter")
+func configure_bindings(binder: InjectionBinder) -> void:
 	assert(false, "Not implemented")
