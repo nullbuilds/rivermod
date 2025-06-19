@@ -11,6 +11,12 @@ func configure_bindings(binder: InjectionBinder) -> void:
 	binder.bind(GameFileSource, _provide_game_file_source)
 	binder.bind(GameSaveDataRepository, _provide_game_save_data_repository)
 	binder.bind(EditorFileSource, _provide_editor_file_source)
+	binder.bind(SaveArchiveRepository, _provide_save_archive_repository)
+
+
+## Provides a SaveArchiveRepository
+func _provide_save_archive_repository(injector: Injector) -> SaveArchiveRepository:
+	return FileSystemSaveArchiveRepository.new(injector.provide(EditorFileSource))
 
 
 ## Provides an EditorFileSource
