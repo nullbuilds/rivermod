@@ -2,6 +2,9 @@ class_name GameSaveDataRepository
 extends Object
 ## Abstract repository for accessing save files from the game's installation.
 
+## The total number of game save slots.
+const SAVE_SLOTS: int = 10
+
 ## Returns the status of the last operation.
 func get_error() -> Error:
 	assert(false, "Not implemented")

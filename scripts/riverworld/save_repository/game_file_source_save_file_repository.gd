@@ -23,7 +23,7 @@ func get_error() -> Error:
 ## Returns the save data for the given slot or null if no data exists for that
 ## slot or there was an error reading the slot.
 func get_save_data(slot: int) -> GameSaveData:
-	assert(slot >= 0 and slot <= 9, "slot must be in the range [0, 9]")
+	assert(slot >= 0 and slot < GameSaveDataRepository.SAVE_SLOTS, "slot must be in the range [0, %d]" % GameSaveDataRepository.SAVE_SLOTS)
 	
 	var game_save_data: GameSaveData = null
 	var map_file_name: String = GameFileSource.get_map_save_file_name(slot)
@@ -32,8 +32,15 @@ func get_save_data(slot: int) -> GameSaveData:
 	_mutex.lock()
 	
 	# Verify the files exist
-	if not _game_file_source.has_file(data_file_name) or \
-			not _game_file_source.has_file(map_file_name):
+	var has_data_file: bool = _game_file_source.has_file(data_file_name)
+	var has_map_file: bool = _game_file_source.has_file(map_file_name)
+	if not has_data_file and not has_map_file:
+		# If both files are missing, the slot is just empty
+		_error = Error.OK
+		_mutex.unlock()
+		return game_save_data
+	elif has_data_file != has_map_file:
+		# If only one file is missing, the slot is corrupt
 		_error = Error.ERR_FILE_NOT_FOUND
 		_mutex.unlock()
 		return game_save_data
@@ -79,19 +86,23 @@ func get_save_data(slot: int) -> GameSaveData:
 ## 
 ## Note that modified time will not be set. Only the save contents.
 func set_save_data(slot: int, game_save_data: GameSaveData) -> Error:
-	assert(slot >= 0 and slot <= 9, "slot must be in the range [0, 9]")
-	assert(game_save_data != null, "game_save_data must not be null")
+	assert(slot >= 0 and slot < GameSaveDataRepository.SAVE_SLOTS, "slot must be in the range [0, %d]" % GameSaveDataRepository.SAVE_SLOTS)
 	
 	_mutex.lock()
-	
 	var map_file_name: String = GameFileSource.get_map_save_file_name(slot)
-	_error = _game_file_source.write_file(map_file_name, game_save_data.get_map_bytes())
+	if game_save_data != null:
+		_error = _game_file_source.write_file(map_file_name, game_save_data.get_map_bytes())
+	else:
+		_error = _game_file_source.delete_file(map_file_name)
 	if _error != Error.OK:
 		_mutex.unlock()
 		return _error
 	
 	var data_file_name: String = GameFileSource.get_data_save_file_name(slot)
-	_error = _game_file_source.write_file(data_file_name, game_save_data.get_data_bytes())
+	if game_save_data != null:
+		_error = _game_file_source.write_file(data_file_name, game_save_data.get_data_bytes())
+	else:
+		_error = _game_file_source.delete_file(data_file_name)
 	if _error != Error.OK:
 		_mutex.unlock()
 		return _error
