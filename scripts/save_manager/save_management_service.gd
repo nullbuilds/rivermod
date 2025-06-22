@@ -197,6 +197,8 @@ func _change_slot_save(slot: int, save_id: String) -> Error:
 
 ## Updates the internal cache for a save slot.
 func _update_slot_save_id(slot: int, save_id: String) -> void:
-	_slot_save_ids[slot] = save_id
-	var save: SaveArchiveManifest = _archived_saves.get(save_id)
-	slot_save_changed.emit(slot, save)
+	var current_id: String = _slot_save_ids[slot]
+	if save_id != current_id:
+		_slot_save_ids[slot] = save_id
+		var save: SaveArchiveManifest = _archived_saves.get(save_id)
+		slot_save_changed.emit(slot, save)
