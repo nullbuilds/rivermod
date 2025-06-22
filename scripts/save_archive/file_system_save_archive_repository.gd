@@ -1,6 +1,6 @@
 class_name FileSystemSaveArchiveRepository
 extends SaveArchiveRepository
-## Save archive implemented using the file system.
+## Save archive implemented using the file system. Thread safe.
 
 const _SAVE_MANIFEST_FILE_NAME: String = "save.json"
 const _MAP_FILE_NAME: String = "MAP.SAV"
