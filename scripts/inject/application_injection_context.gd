@@ -6,17 +6,21 @@ const _EDITOR_CONFIG_FILE_PATH: String = "user://editor.cfg"
 
 ## Configures the provided binder.
 func configure_bindings(binder: InjectionBinder) -> void:
-	binder.bind(EditorConfigurationSource, _provide_editor_configuration_source)
 	binder.bind(EditorConfigurationService, _provide_editor_configuration_service)
 	binder.bind(GameFileSource, _provide_game_file_source)
-	binder.bind(GameSaveDataRepository, _provide_game_save_data_repository)
 	binder.bind(EditorFileSource, _provide_editor_file_source)
-	binder.bind(SaveArchiveRepository, _provide_save_archive_repository)
+	binder.bind(SaveManagementService, _provide_save_management_service)
 
 
-## Provides a SaveArchiveRepository
-func _provide_save_archive_repository(injector: Injector) -> SaveArchiveRepository:
-	return FileSystemSaveArchiveRepository.new(injector.provide(EditorFileSource))
+## Provides a SaveManagementService
+func _provide_save_management_service(injector: Injector) -> SaveManagementService:
+	var editor_file_source: EditorFileSource = injector.provide(EditorFileSource)
+	var save_archive: SaveArchiveRepository = FileSystemSaveArchiveRepository.new(editor_file_source)
+	
+	var game_file_source: GameFileSource = injector.provide(GameFileSource)
+	var game_save_repo: GameSaveDataRepository = GameFileSourceSaveDataRepository.new(game_file_source)
+	
+	return SaveManagementService.new(save_archive, game_save_repo)
 
 
 ## Provides an EditorFileSource
@@ -27,25 +31,18 @@ func _provide_editor_file_source(injector: Injector) -> EditorFileSource:
 	protected_file_paths.append("shader_cache")
 	protected_file_paths.append("vulkan")
 	
-	return FileSystemEditorFileSource.new(injector.provide(EditorConfigurationService),
-			protected_file_paths)
-
-
-## Provides a GameSaveDataRepository
-func _provide_game_save_data_repository(injector: Injector) -> GameSaveDataRepository:
-	return GameFileSourceSaveDataRepository.new(injector.provide(GameFileSource))
+	var config_service: EditorConfigurationService = injector.provide(EditorConfigurationService)
+	
+	return FileSystemEditorFileSource.new(config_service, protected_file_paths)
 
 
 ## Provides a GameFileSource instance.
 func _provide_game_file_source(injector: Injector) -> GameFileSource:
-	return InstallationGameFileSource.new(injector.provide(EditorConfigurationService))
+	var config_service: EditorConfigurationService = injector.provide(EditorConfigurationService)
+	return InstallationGameFileSource.new(config_service)
 
 
 ## Provides an EditorConfigurationService instance.
-func _provide_editor_configuration_service(injector: Injector) -> EditorConfigurationService:
-	return EditorConfigurationService.new(injector.provide(EditorConfigurationSource))
-
-
-## Provides an EditorConfigurationSource instance.
-func _provide_editor_configuration_source(_injector: Injector) -> EditorConfigurationSource:
-	return ConfigFileEditorConfigurationSource.new(_EDITOR_CONFIG_FILE_PATH)
+func _provide_editor_configuration_service(_injector: Injector) -> EditorConfigurationService:
+	var config_source: EditorConfigurationSource = ConfigFileEditorConfigurationSource.new(_EDITOR_CONFIG_FILE_PATH)
+	return EditorConfigurationService.new(config_source)
