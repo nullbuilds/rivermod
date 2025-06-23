@@ -9,21 +9,25 @@ func configure_bindings(binder: InjectionBinder) -> void:
 	binder.bind(EditorConfigurationService, _provide_editor_configuration_service)
 	binder.bind(GameFileSource, _provide_game_file_source)
 	binder.bind(EditorFileSource, _provide_editor_file_source)
-	binder.bind(SaveManagementService, _provide_save_management_service)
+	binder.bind(AsyncSaveManagementService, _provide_async_save_management_service)
 
 
-## Provides a SaveManagementService
-func _provide_save_management_service(injector: Injector) -> SaveManagementService:
+## Provides an AsyncSaveManagementService.
+func _provide_async_save_management_service(injector: Injector) -> AsyncSaveManagementService:
 	var editor_file_source: EditorFileSource = injector.provide(EditorFileSource)
 	var save_archive: SaveArchiveRepository = FileSystemSaveArchiveRepository.new(editor_file_source)
 	
 	var game_file_source: GameFileSource = injector.provide(GameFileSource)
 	var game_save_repo: GameSaveDataRepository = GameFileSourceSaveDataRepository.new(game_file_source)
 	
-	return SaveManagementService.new(save_archive, game_save_repo)
+	var save_management_service: SaveManagementService = SaveManagementService.new(save_archive, game_save_repo)
+	
+	var config_service: EditorConfigurationService = injector.provide(EditorConfigurationService)
+	
+	return AsyncSaveManagementService.new(save_management_service, config_service)
 
 
-## Provides an EditorFileSource
+## Provides an EditorFileSource.
 func _provide_editor_file_source(injector: Injector) -> EditorFileSource:
 	var protected_file_paths: PackedStringArray = PackedStringArray()
 	protected_file_paths.append(_EDITOR_CONFIG_FILE_PATH)
