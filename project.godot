@@ -18,7 +18,3 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="Rivermod"
-
-[threading]
-
-worker_pool/max_threads=1
