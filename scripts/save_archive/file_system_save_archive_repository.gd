@@ -164,6 +164,7 @@ func _load_manifest(manifest_path: String) -> SaveArchiveManifest:
 func _create_manifest(save_data: GameSaveData) -> SaveArchiveManifest:
 	var id: String = _get_save_id(save_data)
 	var created_at_timestamp: int = save_data.get_last_modified_time()
+	var utf_offset_minutes: int = Time.get_time_zone_from_system().bias
 	
 	var parse_context: ParseContext = ParseContext.from_bytes(save_data.get_data_bytes())
 	var save_name: String = SaveDataModel.parse(parse_context).get_save_name()
@@ -180,7 +181,8 @@ func _create_manifest(save_data: GameSaveData) -> SaveArchiveManifest:
 		_last_error = Error.ERR_FILE_CORRUPT
 		return null
 	
-	return SaveArchiveManifest.new(id, save_name, created_at_timestamp)
+	return SaveArchiveManifest.new(id, save_name, created_at_timestamp,
+			utf_offset_minutes)
 
 
 ## Computes the unique id for the given save data.
