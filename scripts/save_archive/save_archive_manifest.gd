@@ -60,19 +60,20 @@ func get_save_name() -> String:
 	return _save_name
 
 
+## Gets the seconds since the Unix epoch the save was created.
+func get_created_at_timestamp() -> int:
+	return _created_at_timestamp
+
+
 ## Gets the archived save's name as the game would display it.
 func get_save_display_name() -> String:
 	return _save_name.replace(" ", "")
 
 
-## Gets the number of seconds since the Unix epoch when the save was created.
-func get_created_at_timestamp() -> int:
-	return _created_at_timestamp
-
-
-## Gets the UTC offset at the time the save was created.
-func get_utc_offset_minutes() -> int:
-	return _utc_offset_minutes
+## Gets the string representation of the save date.
+func get_save_date() -> String:
+	var adjusted_timestamp: int = _created_at_timestamp + _utc_offset_minutes * 60
+	return Time.get_datetime_string_from_unix_time(adjusted_timestamp, true)
 
 
 ## Serializes the manifest to a JSON string.
