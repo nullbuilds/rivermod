@@ -31,7 +31,7 @@ func get_game_install_editor_directory() -> String:
 
 ## Returns the default interval in milliseconds between automatic game save syncs.
 func get_automatic_game_save_sync_interval() -> int:
-	return _get_configuration(_SAVE_MANAGER_CONTEXT, _AUTOMATIC_GAME_SAVE_SYNC_INTERVAL_KEY, 200)
+	return _get_configuration(_SAVE_MANAGER_CONTEXT, _AUTOMATIC_GAME_SAVE_SYNC_INTERVAL_KEY, 2000)
 
 
 ## Returns whether automatic game save sync'ing is enabled.

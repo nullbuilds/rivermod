@@ -146,7 +146,7 @@ func _synchronizer_thread() -> void:
 
 ## Performs the next sync operation.
 func _perform_operation() -> void:
-	var current_time: int = int(Time.get_unix_time_from_system())
+	var current_time: int = int(Time.get_ticks_msec())
 	var sync_interval: int = _editor_config_service.get_automatic_game_save_sync_interval()
 	var _next_sync_time: int = _last_sync_attempt_time + sync_interval
 	
