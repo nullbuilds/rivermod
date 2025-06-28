@@ -66,7 +66,8 @@ func assign_save_to_slot(slot: int, save_id: String) -> Error:
 	_mutex.lock()
 	error = synchronize()
 	if error == Error.OK:
-		error = _change_slot_save(slot, save_id)
+		var manifest: SaveArchiveManifest = _archived_saves.get(save_id)
+		error = _change_slot_save(slot, manifest)
 	_mutex.unlock()
 	return error
 
@@ -104,12 +105,14 @@ func delete_save(save_id: String) -> Error:
 	if error == Error.OK:
 		error = _save_archive_repository.delete_save(save_id)
 		if error == Error.ERR_DOES_NOT_EXIST or error == Error.OK:
+			_archived_saves.erase(save_id)
+			save_removed.emit(save_id)
 			error = Error.OK
 			var slot_update_error: Error = Error.OK
 			for slot in range(GameSaveDataRepository.SAVE_SLOTS):
 				var slot_save_id: String = _slot_save_ids[slot]
 				if slot_save_id == save_id:
-					slot_update_error = _change_slot_save(slot, _BLANK_SLOT_SAVE_ID)
+					slot_update_error = _change_slot_save(slot, null)
 					if slot_update_error != Error.OK:
 						error = slot_update_error
 	
@@ -123,21 +126,21 @@ func _synchronize_save_slots() -> Error:
 	var error: Error = Error.OK
 	
 	for slot in range(GameSaveDataRepository.SAVE_SLOTS):
-		var save_id: String = _BLANK_SLOT_SAVE_ID
 		var save_data: GameSaveData = _game_save_data_repository.get_save_data(slot)
+		var manifest: SaveArchiveManifest = null
 		error = _game_save_data_repository.get_error()
 		if error != Error.OK or save_data == null:
 			overal_status = error
-			_update_slot_save_id(slot, save_id)
+			_update_slot_save_id(slot, manifest)
 			continue
 		
-		var manifest: SaveArchiveManifest = _save_archive_repository.archive(save_data)
+		manifest = _save_archive_repository.archive(save_data)
 		error = _save_archive_repository.get_error()
 		if error == Error.OK:
-			save_id = manifest.get_id()
+			_update_slot_save_id(slot, manifest)
 		else:
 			overal_status = error
-		_update_slot_save_id(slot, save_id)
+			_update_slot_save_id(slot, null)
 	
 	return overal_status
 
@@ -174,11 +177,12 @@ func _synchronize_save_archive() -> Error:
 	return error
 
 ## Updates the save for a given save slot and internal data caches.
-func _change_slot_save(slot: int, save_id: String) -> Error:
+func _change_slot_save(slot: int, manifest: SaveArchiveManifest) -> Error:
 	var error: Error = Error.OK
 	
 	var save_data: GameSaveData = null
-	if save_id != _BLANK_SLOT_SAVE_ID:
+	if manifest != null:
+		var save_id: String = manifest.get_id()
 		save_data = _save_archive_repository.get_archived_save_data(save_id)
 		error = _save_archive_repository.get_error()
 		if error != Error.OK:
@@ -188,17 +192,18 @@ func _change_slot_save(slot: int, save_id: String) -> Error:
 	if error != Error.OK:
 		return error
 	
-	_slot_save_ids[slot] = save_id
-	if save_id == _BLANK_SLOT_SAVE_ID:
-		_archived_saves.erase(save_id)
+	_update_slot_save_id(slot, manifest)
 	
 	return error
 
 
 ## Updates the internal cache for a save slot.
-func _update_slot_save_id(slot: int, save_id: String) -> void:
+func _update_slot_save_id(slot: int, manifest: SaveArchiveManifest) -> void:
 	var current_id: String = _slot_save_ids[slot]
+	var save_id: String = _BLANK_SLOT_SAVE_ID
+	if manifest != null:
+		save_id = manifest.get_id()
+	
 	if save_id != current_id:
 		_slot_save_ids[slot] = save_id
-		var save: SaveArchiveManifest = _archived_saves.get(save_id)
-		slot_save_changed.emit(slot, save)
+		slot_save_changed.emit(slot, manifest)
