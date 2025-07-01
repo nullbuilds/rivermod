@@ -17,9 +17,10 @@ signal save_removed(save_id: String)
 
 ## Indicates the current sync status for the saves.
 enum SyncStatus {
-	STOPPED,      ## Synchronization is not currently occurring
-	SYNCHRONIZED, ## All saves have been synchronized
-	FAILED        ## One or more sync operations failed
+	STOPPED,        ## Synchronization is not currently occurring
+	SYNCHRONIZED,   ## All saves have been synchronized
+	DESYNCHRONIZED, ## Saves have not yet been synchronized
+	FAILED          ## One or more sync operations failed
 }
 
 const _SYNCHRONIZER_LOOP_DELAY_MILLIS: int = 100
@@ -162,7 +163,7 @@ func _perform_operation() -> void:
 		var result: Error = pending_operation.call()
 		if result == Error.OK:
 			status = SyncStatus.SYNCHRONIZED
-			_last_sync_time = current_time
+			_last_sync_time = int(Time.get_unix_time_from_system())
 		
 		sync_status_changed.emit.call_deferred(status, _last_sync_time)
 
