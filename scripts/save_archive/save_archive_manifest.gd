@@ -72,8 +72,8 @@ func get_save_display_name() -> String:
 
 ## Gets the string representation of the save date.
 func get_save_date() -> String:
-	var adjusted_timestamp: int = _created_at_timestamp + _utc_offset_minutes * 60
-	return Time.get_datetime_string_from_unix_time(adjusted_timestamp, true)
+	return TimeUtils.get_local_date_time(_created_at_timestamp,
+			_utc_offset_minutes)
 
 
 ## Serializes the manifest to a JSON string.
