@@ -56,6 +56,14 @@ func get_archived_saves() -> Array[SaveArchiveManifest]:
 	return saves
 
 
+## Returns the manifest for a save with the given id.
+func get_archived_save(save_id: String) -> SaveArchiveManifest:
+	_mutex.lock()
+	var save: SaveArchiveManifest = _archived_saves.get(save_id)
+	_mutex.unlock()
+	return save
+
+
 ## Assigns the given archived save to the specified slot. Forces a
 ## synchronization to occur.
 func assign_save_to_slot(slot: int, save_id: String) -> Error:

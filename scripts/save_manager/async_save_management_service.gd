@@ -98,6 +98,14 @@ func get_archived_saves() -> Array[SaveArchiveManifest]:
 	return saves
 
 
+## Returns the manifest for a save with the given id.
+func get_archived_save(save_id: String) -> SaveArchiveManifest:
+	_synchronizer_mutex.lock()
+	var save: SaveArchiveManifest = _save_management_service.get_archived_save(save_id)
+	_synchronizer_mutex.unlock()
+	return save
+
+
 ## Triggers a manual sync.
 ## 
 ## Will be applied asynchronously.
