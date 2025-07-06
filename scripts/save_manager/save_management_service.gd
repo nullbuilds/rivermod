@@ -129,7 +129,16 @@ func _synchronize_save_slots() -> Error:
 		var save_data: GameSaveData = _game_save_data_repository.get_save_data(slot)
 		var manifest: SaveArchiveManifest = null
 		error = _game_save_data_repository.get_error()
-		if error != Error.OK or save_data == null:
+		if error == Error.ERR_FILE_ALREADY_IN_USE:
+			# When a save slot is deleted or changed, the file handle is closed
+			# immediately; however, the engine or OS seems to keep it locked for
+			# several more seconds after. This can result in a file being
+			# updated,  this function seeing an error and reporting it as empty,
+			# then being set back to the updated value again on the next sync.
+			# Ignoring an in-use error avoids this at the cost of accuracy.
+			overal_status = error
+			continue
+		elif error != Error.OK or save_data == null:
 			overal_status = error
 			_update_slot_save_id(slot, manifest)
 			continue
