@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://coc487yi3071n"]
+
+[ext_resource type="Script" uid="uid://02cs1flcwktv" path="res://scenes/ui/save_manager/save_slot_list/save_slot_list.gd" id="1_fhu25"]
+
+[node name="SaveSlotList" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+script = ExtResource("1_fhu25")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="SlotContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
