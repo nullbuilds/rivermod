@@ -4,6 +4,7 @@ extends Object
 
 const _MAP_SAVE_FILE_PATTERN: String = "MAP0%d.SAV"
 const _DATA_SAVE_FILE_PATTERN: String = "RIVER0%d0.SAV"
+const _DIRECT_X_EXECUTABLE_NAME: String = "XWORLD.EXE"
 
 ## Returns whether the given file path is one of the game's save files or not.
 static func is_save_file(path: String) -> bool:
@@ -20,6 +21,11 @@ static func get_map_save_file_name(slot: int) -> String:
 static func get_data_save_file_name(slot: int) -> String:
 	assert(slot >= 0 and slot <= 9, "slot must be in the range [0, 9]")
 	return _DATA_SAVE_FILE_PATTERN % slot
+
+
+## Checks if the given path is a Riverworld game directory.
+static func is_game_directory(path: String) -> bool:
+	return FileAccess.file_exists(path.path_join(_DIRECT_X_EXECUTABLE_NAME))
 
 
 ## Returns if the given file exists.
