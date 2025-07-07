@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7fwujm7u54tj"]
+
+[ext_resource type="Texture2D" uid="uid://b5bhsahn8qdg6" path="res://scenes/ui/save_manager/save_sync_status_bar/save_sync_now_button/tile_0209.png" id="1_el7fk"]
+
+[node name="SaveSyncNowButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Sync now"
+icon = ExtResource("1_el7fk")
+icon_alignment = 1
