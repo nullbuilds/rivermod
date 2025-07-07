@@ -41,6 +41,20 @@ func provide(clazz: Object) -> Object:
 	return _class_instance_mapping.get(clazz)
 
 
+## Provides an ad-hoc instance of the given scene.
+## 
+## After the provider is invoked, an Injector will automatically inject an
+## instance of itself into any field of the instanciated class typed as an
+## Injector.
+func provide_scene(scene: PackedScene) -> Node:
+	assert(scene != null, "scene must not be null")
+	
+	var node: Node = scene.instantiate()
+	_inject_properties(node)
+	
+	return node
+
+
 ## Creates a new instance of the provided class and injects itself.
 func _create_instance(clazz: Object) -> Object:
 	var instance: Object = null
