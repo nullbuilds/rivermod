@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b80grj6038xq0"]
+
+[ext_resource type="Script" uid="uid://b3myfvgpxyuop" path="res://scenes/ui/save_manager/save_slot_list/save_slot/save_slot.gd" id="1_kej3q"]
+[ext_resource type="PackedScene" uid="uid://cdkbsm6iqovkg" path="res://scenes/ui/save_manager/save_game_card/save_game_card.tscn" id="2_316t3"]
+
+[node name="SaveSlot" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource("1_kej3q")
+
+[node name="SlotContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SlotNumberPanelContainer" type="PanelContainer" parent="SlotContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SlotContainer/SlotNumberPanelContainer"]
+layout_mode = 2
+
+[node name="SlotIndexLabel" type="Label" parent="SlotContainer/SlotNumberPanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+max_lines_visible = 1
+visible_characters = 1
+
+[node name="SaveGameCard" parent="SlotContainer" instance=ExtResource("2_316t3")]
+unique_name_in_owner = true
+layout_mode = 2
