@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvucjw8ed6cat"]
+
+[ext_resource type="Script" uid="uid://djvtj5am1xup" path="res://scenes/ui/save_manager/save_delete_popup/save_delete_popup.gd" id="1_7tk35"]
+
+[node name="SaveDeletePopup" type="PopupPanel"]
+size = Vector2i(360, 122)
+visible = true
+min_size = Vector2i(360, 0)
+theme_type_variation = &"SolidPopupPanel"
+script = ExtResource("1_7tk35")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 352.0
+offset_bottom = 114.0
+theme_type_variation = &"SaveCardVBoxContainer"
+
+[node name="HeaderLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Delete save \"0123456789ABCDEF\"?"
+
+[node name="WarningLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ParagraphLabel"
+text = "This cannot be undone."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"ButtonHBoxContainer"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DangerousButton"
+text = "Delete"
