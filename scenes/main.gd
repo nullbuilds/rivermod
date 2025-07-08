@@ -2,7 +2,8 @@ class_name Main
 extends Node
 ## The editor main scnee.
 
-const _DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
+const _EDITOR_DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
+const _MODDING_RESOURCES_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Modding-resources"
 
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
@@ -16,9 +17,12 @@ var _game_file_source: GameFileSource = null
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	
+	# Setup signals
 	_main_menu_bar.editor_game_directory_pressed.connect(_on_change_game_directory_pressed)
 	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation)
+	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources)
 	
+	# Setup dependency injection
 	_injector = Injector.create(ApplicationInjectionContext.new())
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
@@ -69,9 +73,14 @@ func _stop_services() -> void:
 	_save_manager.stop()
 
 
-## Opens the online help documentation.
+## Opens the online editor help documentation.
 func _open_help_documentation() -> void:
-	OS.shell_open(_DOCUMENTATION_URL)
+	OS.shell_open(_EDITOR_DOCUMENTATION_URL)
+
+
+## Opens the online modding resources.
+func _open_modding_resources() -> void:
+	OS.shell_open(_MODDING_RESOURCES_URL)
 
 
 ## Prompts the user to select a new game directory.
@@ -113,6 +122,11 @@ func _on_change_game_directory_pressed() -> void:
 ## Called when the user requests to view the editor help documentation.
 func _on_open_editor_help_documentation() -> void:
 	_open_help_documentation()
+
+
+## Called when the user requests to view the modding resources.
+func _on_open_modding_resources() -> void:
+	_open_modding_resources()
 
 
 ## Called when the user selects a new game directory.

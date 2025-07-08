@@ -25,6 +25,8 @@ item_0/id = 0
 [node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
 unique_name_in_owner = true
 title = "Help"
-item_count = 1
+item_count = 2
 item_0/text = "Online Documentation"
 item_0/id = 0
+item_1/text = "Modding Resources"
+item_1/id = 1
