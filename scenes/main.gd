@@ -2,7 +2,7 @@ class_name Main
 extends Node
 ## The editor main scnee.
 
-const _DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki"
+const _DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
 
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
