@@ -24,7 +24,10 @@ namespace Riverworld {
         
         for (u8 index = 0, index < string_length - 1, index += 1) {
             char character = string[index];
-            std::assert(std::ctype::isalnum(character), "Save names must only contain alpha-numeric characters and the null terminator; found character with code " + std::string::to_string(u8(character)));
+            bool is_character = std::ctype::isalnum(character);
+            bool is_space = character == 0x20; // Spaces can exist but are not shown in the UI
+            bool is_valid = is_character || is_space;
+            std::assert(is_valid, "Save names must only contain alpha-numeric characters, spaces, and the null terminator; found character with code " + std::string::to_string(u8(character)));
         }
     };
     

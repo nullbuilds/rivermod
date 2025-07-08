@@ -1,0 +1,106 @@
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cvejn2drs4byl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqu5r"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tjqa"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n3oo"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orw62"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56c54"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65ii4"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4h2o"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu17m"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.7, 0.084, 0.084, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwyt8"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2l62"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cv7e8"]
+bg_color = Color(0.7, 0.084, 0.084, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uiih"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.1, 0.1, 0.882353)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fq5a"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.2, 0.2, 0.2, 0.752941)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+ButtonHBoxContainer/base_type = &"HBoxContainer"
+ButtonHBoxContainer/constants/separation = 8
+DangerousButton/base_type = &"Button"
+DangerousButton/styles/disabled = SubResource("StyleBoxFlat_bqu5r")
+DangerousButton/styles/disabled_mirrored = SubResource("StyleBoxFlat_8tjqa")
+DangerousButton/styles/focus = SubResource("StyleBoxFlat_8n3oo")
+DangerousButton/styles/hover = SubResource("StyleBoxFlat_orw62")
+DangerousButton/styles/hover_mirrored = SubResource("StyleBoxFlat_56c54")
+DangerousButton/styles/hover_pressed = SubResource("StyleBoxFlat_65ii4")
+DangerousButton/styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_j4h2o")
+DangerousButton/styles/normal = SubResource("StyleBoxFlat_tu17m")
+DangerousButton/styles/normal_mirrored = SubResource("StyleBoxFlat_iwyt8")
+DangerousButton/styles/pressed = SubResource("StyleBoxFlat_f2l62")
+DangerousButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_cv7e8")
+ParagraphLabel/base_type = &"Label"
+ParagraphLabel/font_sizes/font_size = 14
+PopupVBoxContainer/base_type = &"VBoxContainer"
+PopupVBoxContainer/constants/separation = 6
+SaveCardDateLabel/base_type = &"Label"
+SaveCardDateLabel/font_sizes/font_size = 10
+SaveCardMarginContainer/base_type = &"MarginContainer"
+SaveCardMarginContainer/constants/margin_bottom = 6
+SaveCardMarginContainer/constants/margin_left = 6
+SaveCardMarginContainer/constants/margin_right = 6
+SaveCardMarginContainer/constants/margin_top = 6
+SaveCardNameLabel/base_type = &"Label"
+SaveCardNameLabel/font_sizes/font_size = 14
+SaveCardVBoxContainer/base_type = &"VBoxContainer"
+SaveCardVBoxContainer/constants/separation = 12
+SaveSyncStatusLabel/base_type = &"Label"
+SaveSyncStatusLabel/font_sizes/font_size = 10
+SolidPopupPanel/base_type = &"PopupPanel"
+SolidPopupPanel/styles/panel = SubResource("StyleBoxFlat_0uiih")
+WidgetMarginContainer/base_type = &"MarginContainer"
+WidgetMarginContainer/constants/margin_bottom = 4
+WidgetMarginContainer/constants/margin_left = 4
+WidgetMarginContainer/constants/margin_right = 4
+WidgetMarginContainer/constants/margin_top = 4
+WidgetPanelContainer/base_type = &"PanelContainer"
+WidgetPanelContainer/styles/panel = SubResource("StyleBoxFlat_6fq5a")

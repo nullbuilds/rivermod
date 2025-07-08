@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvimecsakv0jv"]
+
+[ext_resource type="Script" uid="uid://dut14hn2hg84d" path="res://scenes/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://b0m0sa3tvqccl" path="res://scenes/ui/main_menu_bar/main_menu_bar.tscn" id="2_0wfyh"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o5qli")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="MainMenuBar" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("2_0wfyh")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ContentContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

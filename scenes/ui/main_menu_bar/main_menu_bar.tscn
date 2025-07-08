@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0m0sa3tvqccl"]
+
+[ext_resource type="Script" uid="uid://dhx76vu2lcv6l" path="res://scenes/ui/main_menu_bar/main_menu_bar.gd" id="1_sivsr"]
+
+[node name="MainMenuBar" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+script = ExtResource("1_sivsr")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="EditorPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
+unique_name_in_owner = true
+title = "Editor"
+item_count = 1
+item_0/text = "Set Game Directory"
+item_0/id = 0
+
+[node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
+unique_name_in_owner = true
+title = "Help"
+item_count = 1
+item_0/text = "Online Documentation"
+item_0/id = 0
