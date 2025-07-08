@@ -7,6 +7,7 @@ const _DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki"
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
+var _game_file_source: GameFileSource = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
 @onready var _save_manager_scene: PackedScene = preload("res://scenes/ui/save_manager/save_management_widget.tscn")
@@ -21,6 +22,7 @@ func _ready() -> void:
 	_injector = Injector.create(ApplicationInjectionContext.new())
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
+	_game_file_source = _injector.provide(GameFileSource)
 	
 	# Start services
 	_start_services()
@@ -91,7 +93,7 @@ func _show_invalid_game_directory_dialog() -> void:
 ## Updates the game directory to the given user-provided value.
 func _update_game_directory(new_directory: String) -> void:
 	if not new_directory.is_empty():
-		if GameFileSource.is_game_directory(new_directory):
+		if _game_file_source.is_install_directory(new_directory):
 			_config_service.set_game_install_directory(new_directory)
 			_config_service.save()
 			
