@@ -26,12 +26,16 @@ To honor and respect the rights of copyright holders, contributions which includ
 
 Finally, no contribution created in part using generative AI will be permitted regardless of any copyright release claims made by the tool's provider.
 
+### File format documentation
+
+If you've learned something new about one of Riverworld's file formats, please add or update the [format documentation][file-formats].
+
 ### Coding conventions
 
 For consistency, please observe Godot's coding style guides and conventions:
 * [GDScript][gdscript-style-guide]
 * [C#][csharp-style-guide]
-* [GLSL][shader-style-guide]
+* [Shaders][shader-style-guide]
 
 ### Testing
 
@@ -44,3 +48,4 @@ When opening a pull request, please include evidence showing the changes have be
 [feature-request]: https://github.com/nullbuilds/rivermod/issues/new?template=feature_request.md
 [all-bugs]: https://github.com/nullbuilds/rivermod/issues?q=is%3Aissue%20label%3Atype%2Fbug
 [all-enhancements]: https://github.com/nullbuilds/rivermod/issues?q=is%3Aissue%20label%3Atrype%2Fenhancement
+[file-formats]: /modding-resources/file-formats

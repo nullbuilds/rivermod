@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba15sb1ppai7g"]
+
+[ext_resource type="Script" uid="uid://ma5mh6qxv3bl" path="res://scenes/ui/save_manager/save_sync_status_bar/save_sync_status_indicator/save_sync_status_indicator.gd" id="1_8d86a"]
+
+[node name="SaveSyncStatusIndicator" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+tooltip_text = "TEST"
+script = ExtResource("1_8d86a")
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"SaveSyncStatusLabel"
+text = "LAST SYNC YYYY-MM-dd HH:mm:ss"
+horizontal_alignment = 2
+vertical_alignment = 2

@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv6yq75wbx36i"]
+
+[ext_resource type="PackedScene" uid="uid://0krtudedr6h4" path="res://scenes/ui/save_manager/save_list/save_list.tscn" id="1_e83of"]
+[ext_resource type="Script" uid="uid://bcxvomx25l6dt" path="res://scenes/ui/save_manager/save_management_widget.gd" id="1_fvf5e"]
+[ext_resource type="PackedScene" uid="uid://dplid51g2of8q" path="res://scenes/ui/save_manager/save_sync_status_bar/save_sync_status_bar.tscn" id="2_fo82n"]
+[ext_resource type="PackedScene" uid="uid://coc487yi3071n" path="res://scenes/ui/save_manager/save_slot_list/save_slot_list.tscn" id="2_w2tmv"]
+[ext_resource type="PackedScene" uid="uid://dvucjw8ed6cat" path="res://scenes/ui/save_manager/save_delete_popup/save_delete_popup.tscn" id="5_gb8q6"]
+
+[node name="SaveManagementWidget" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 775)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"WidgetMarginContainer"
+script = ExtResource("1_fvf5e")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"WidgetPanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SaveManagerLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Save Manager"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SlotListHeaderLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Slots"
+
+[node name="SaveSlotList" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_w2tmv")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="SaveListHeaderLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Saves"
+
+[node name="SaveSyncStatusBar" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("2_fo82n")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SaveList" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("1_e83of")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SavePopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+
+[node name="SaveSlotPopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+
+[node name="SaveDeletePopup" parent="." instance=ExtResource("5_gb8q6")]
+unique_name_in_owner = true
+visible = false
