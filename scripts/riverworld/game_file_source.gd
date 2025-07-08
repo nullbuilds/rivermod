@@ -23,9 +23,9 @@ static func get_data_save_file_name(slot: int) -> String:
 	return _DATA_SAVE_FILE_PATTERN % slot
 
 
-## Checks if the given path is a Riverworld game directory.
-static func is_game_directory(path: String) -> bool:
-	return FileAccess.file_exists(path.path_join(_DIRECT_X_EXECUTABLE_NAME))
+## Checks if the given path is a Riverworld install directory.
+func is_install_directory(path: String) -> bool:
+	return has_file(path.path_join(_DIRECT_X_EXECUTABLE_NAME))
 
 
 ## Returns if the given file exists.
