@@ -73,12 +73,12 @@ func _synchronize_saves() -> void:
 ## Sets-up the save popup.
 func _setup_save_popup() -> void:
 	for slot_index in range(GameSaveDataRepository.SAVE_SLOTS):
-		var text: String = "Assign to Slot %d" % slot_index
+		var text: String = "Assign to slot %d" % slot_index
 		_save_popup_menu.add_item(text, slot_index)
 		
 	_save_popup_menu.add_separator()
 	
-	_save_popup_menu.add_item("Delete", _SAVE_POPUP_DELETE_SAVE_ID)
+	_save_popup_menu.add_item("Delete save", _SAVE_POPUP_DELETE_SAVE_ID)
 	
 	_save_popup_menu.id_pressed.connect(_on_save_popup_pressed)
 
