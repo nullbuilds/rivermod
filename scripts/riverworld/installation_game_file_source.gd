@@ -90,7 +90,10 @@ func _get_valid_game_path(path: String) -> String:
 	if _last_error != Error.OK:
 		return ""
 	
-	var absolute_path: String = install_directory.path_join(path).simplify_path()
+	var absolute_path: String = path
+	if not path.is_absolute_path():
+		absolute_path = install_directory.path_join(path).simplify_path()
+	
 	if absolute_path.begins_with(install_directory):
 		var protected_directory: String = _config_service.get_game_install_editor_directory()
 		if not absolute_path.contains(protected_directory):
