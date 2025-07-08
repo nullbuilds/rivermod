@@ -8,8 +8,12 @@ signal editor_help_documentation_pressed()
 ## Emitted when the user chooses the option to change the game directory.
 signal editor_game_directory_pressed()
 
+## Emitted when the user selects the modding resources option.
+signal modding_resources_pressed()
+
 const _EDITOR_GAME_DIRECTORY_ID: int = 0
 const _HELP_DOCUMENTATION_ID: int = 0
+const _HELP_MODDING_RESOURCES_ID: int = 1
 
 @onready var _editor_popup_menu: PopupMenu = %EditorPopupMenu
 @onready var _help_popup_menu: PopupMenu = %HelpPopupMenu
@@ -33,3 +37,5 @@ func _on_help_id_pressed(id: int) -> void:
 	match(id):
 		_HELP_DOCUMENTATION_ID:
 			editor_help_documentation_pressed.emit()
+		_HELP_MODDING_RESOURCES_ID:
+			modding_resources_pressed.emit()
