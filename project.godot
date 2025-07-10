@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Rivermod"
+config/version="0.1.0"
 run/main_scene="uid://cvimecsakv0jv"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
@@ -28,3 +29,12 @@ project/assembly_name="Rivermod"
 [gui]
 
 theme/custom="uid://cvejn2drs4byl"
+
+[rivermod]
+
+help_link="https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
+author_link="https://nullbuilds.github.io/"
+github_link="https://github.com/nullbuilds/rivermod/tree/main"
+modding_resources_link="https://github.com/nullbuilds/rivermod/wiki/Modding-resources"
+copyright="2025 Null Builds (Charles)"
+usage_credits=PackedStringArray("Kenney game assets (https://kenney.nl/assets)")

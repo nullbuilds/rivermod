@@ -2,15 +2,13 @@ class_name Main
 extends Node
 ## The editor main scnee.
 
-const _EDITOR_DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
-const _MODDING_RESOURCES_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Modding-resources"
-
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
 var _game_file_source: GameFileSource = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
+@onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
 @onready var _save_manager_scene: PackedScene = preload("res://scenes/ui/save_manager/save_management_widget.tscn")
 
 ## Construct the main scene.
@@ -19,8 +17,9 @@ func _ready() -> void:
 	
 	# Setup signals
 	_main_menu_bar.editor_game_directory_pressed.connect(_on_change_game_directory_pressed)
-	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation)
-	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources)
+	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation_pressed)
+	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources_pressed)
+	_main_menu_bar.about_pressed.connect(_on_about_pressed)
 	
 	# Setup dependency injection
 	_injector = Injector.create(ApplicationInjectionContext.new())
@@ -75,12 +74,17 @@ func _stop_services() -> void:
 
 ## Opens the online editor help documentation.
 func _open_help_documentation() -> void:
-	OS.shell_open(_EDITOR_DOCUMENTATION_URL)
+	OS.shell_open(ProjectSettings.get_setting("rivermod/help_link"))
 
 
 ## Opens the online modding resources.
 func _open_modding_resources() -> void:
-	OS.shell_open(_MODDING_RESOURCES_URL)
+	OS.shell_open(ProjectSettings.get_setting("rivermod/modding_resources_link"))
+
+
+## Shows a popup about the editor.
+func _show_about_details() -> void:
+	_about_app_dialog.show()
 
 
 ## Prompts the user to select a new game directory.
@@ -120,13 +124,18 @@ func _on_change_game_directory_pressed() -> void:
 
 
 ## Called when the user requests to view the editor help documentation.
-func _on_open_editor_help_documentation() -> void:
+func _on_open_editor_help_documentation_pressed() -> void:
 	_open_help_documentation()
 
 
 ## Called when the user requests to view the modding resources.
-func _on_open_modding_resources() -> void:
+func _on_open_modding_resources_pressed() -> void:
 	_open_modding_resources()
+
+
+## Called when the user requests to view the app's information.
+func _on_about_pressed() -> void:
+	_show_about_details()
 
 
 ## Called when the user selects a new game directory.
