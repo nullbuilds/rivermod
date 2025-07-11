@@ -6,10 +6,12 @@ var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
 var _game_file_source: GameFileSource = null
+var _config_app_dialog: ConfigAppDialog = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
 @onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
 @onready var _invalid_game_directory_dialog: InvalidGameDirectoryDialog = %InvalidGameDirectoryDialog
+@onready var _config_app_dialog_scene: PackedScene = preload("res://scenes/ui/config_app_dialog/config_app_dialog.tscn")
 @onready var _save_manager_scene: PackedScene = preload("res://scenes/ui/save_manager/save_management_widget.tscn")
 
 ## Construct the main scene.
@@ -21,6 +23,7 @@ func _ready() -> void:
 	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation_pressed)
 	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources_pressed)
 	_main_menu_bar.about_pressed.connect(_on_about_pressed)
+	_main_menu_bar.editor_configure_pressed.connect(_on_configure_pressed)
 	_invalid_game_directory_dialog.dismissed.connect(_on_invalid_game_directory_dialog_dismissed)
 	
 	# Setup dependency injection
@@ -28,11 +31,13 @@ func _ready() -> void:
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
 	_game_file_source = _injector.provide(GameFileSource)
+	_config_app_dialog = _injector.provide_scene(_config_app_dialog_scene)
 	
 	# Start services
 	_start_services()
 	
 	# Construct UI
+	add_child(_config_app_dialog)
 	_content_container.add_child(_injector.provide_scene(_save_manager_scene))
 
 
@@ -89,6 +94,11 @@ func _show_about_details() -> void:
 	_about_app_dialog.show()
 
 
+## Shows a dialog to configure the editor.
+func _show_configure_dialog() -> void:
+	_config_app_dialog.show()
+
+
 ## Prompts the user to select a new game directory.
 func _prompt_for_new_game_directory() -> void:
 	get_tree().paused = true
@@ -135,6 +145,11 @@ func _on_open_modding_resources_pressed() -> void:
 ## Called when the user requests to view the app's information.
 func _on_about_pressed() -> void:
 	_show_about_details()
+
+
+## Called when the user requests to configure the application.
+func _on_configure_pressed() -> void:
+	_show_configure_dialog()
 
 
 ## Called when the user selects a new game directory.
