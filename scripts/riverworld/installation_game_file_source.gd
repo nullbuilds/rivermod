@@ -12,6 +12,15 @@ func _init(config_service: EditorConfigurationService) -> void:
 	_config_service = config_service
 
 
+## Checks if the given path is a Riverworld install directory.
+func is_install_directory(path: String) -> bool:
+	if path.is_absolute_path():
+		var executable_name: String = get_direct_x_executable_name()
+		var executable_path: String = path.path_join(executable_name)
+		return FileAccess.file_exists(executable_path)
+	return false
+
+
 ## Returns if the given file exists.
 func has_file(path: String) -> bool:
 	var full_path: String = _get_valid_game_path(path)

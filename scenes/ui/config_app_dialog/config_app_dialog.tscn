@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqljkl1fnt8sf"]
+
+[ext_resource type="Script" uid="uid://d3su27cxci5hl" path="res://scenes/ui/config_app_dialog/config_app_dialog.gd" id="1_itsld"]
+
+[node name="ConfigAppDialog" type="Window"]
+auto_translate_mode = 1
+title = "Configure"
+initial_position = 2
+size = Vector2i(400, 150)
+unresizable = true
+always_on_top = true
+min_size = Vector2i(400, 150)
+script = ExtResource("1_itsld")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"WindowMarginContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SettingGridContainer"
+columns = 2
+
+[node name="AutoSyncLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 0
+text = "Enable automatic save sync"
+
+[node name="AutoSyncCheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="AutoSyncIntervalLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 0
+text = "Automatic save sync interval (ms)"
+
+[node name="AutoSyncIntervalSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 1000.0
+max_value = 20000.0
+step = 250.0
+value = 2000.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Close"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Save and close"

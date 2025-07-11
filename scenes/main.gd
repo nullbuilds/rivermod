@@ -2,32 +2,42 @@ class_name Main
 extends Node
 ## The editor main scnee.
 
-const _DOCUMENTATION_URL: String = "https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
-
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
 var _game_file_source: GameFileSource = null
+var _config_app_dialog: ConfigAppDialog = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
+@onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
+@onready var _invalid_game_directory_dialog: InvalidGameDirectoryDialog = %InvalidGameDirectoryDialog
+@onready var _config_app_dialog_scene: PackedScene = preload("res://scenes/ui/config_app_dialog/config_app_dialog.tscn")
 @onready var _save_manager_scene: PackedScene = preload("res://scenes/ui/save_manager/save_management_widget.tscn")
 
 ## Construct the main scene.
 func _ready() -> void:
 	get_tree().set_auto_accept_quit(false)
 	
+	# Setup signals
 	_main_menu_bar.editor_game_directory_pressed.connect(_on_change_game_directory_pressed)
-	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation)
+	_main_menu_bar.editor_help_documentation_pressed.connect(_on_open_editor_help_documentation_pressed)
+	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources_pressed)
+	_main_menu_bar.about_pressed.connect(_on_about_pressed)
+	_main_menu_bar.editor_configure_pressed.connect(_on_configure_pressed)
+	_invalid_game_directory_dialog.dismissed.connect(_on_invalid_game_directory_dialog_dismissed)
 	
+	# Setup dependency injection
 	_injector = Injector.create(ApplicationInjectionContext.new())
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
 	_game_file_source = _injector.provide(GameFileSource)
+	_config_app_dialog = _injector.provide_scene(_config_app_dialog_scene)
 	
 	# Start services
 	_start_services()
 	
 	# Construct UI
+	add_child(_config_app_dialog)
 	_content_container.add_child(_injector.provide_scene(_save_manager_scene))
 
 
@@ -69,9 +79,24 @@ func _stop_services() -> void:
 	_save_manager.stop()
 
 
-## Opens the online help documentation.
+## Opens the online editor help documentation.
 func _open_help_documentation() -> void:
-	OS.shell_open(_DOCUMENTATION_URL)
+	OS.shell_open(ProjectSettings.get_setting("rivermod/help_link"))
+
+
+## Opens the online modding resources.
+func _open_modding_resources() -> void:
+	OS.shell_open(ProjectSettings.get_setting("rivermod/modding_resources_link"))
+
+
+## Shows a popup about the editor.
+func _show_about_details() -> void:
+	_about_app_dialog.show()
+
+
+## Shows a dialog to configure the editor.
+func _show_configure_dialog() -> void:
+	_config_app_dialog.show()
 
 
 ## Prompts the user to select a new game directory.
@@ -84,10 +109,7 @@ func _prompt_for_new_game_directory() -> void:
 
 ## Informs the user their selected game directory is invalid.
 func _show_invalid_game_directory_dialog() -> void:
-	DisplayServer.dialog_show("Invalid game directory",
-			"Please select the root directory of your Riverworld " + \
-			"installation (the directory containing the game executables).",
-			["Ok"], _on_invalid_game_directory_dialog_dismissed)
+	_invalid_game_directory_dialog.show()
 
 
 ## Updates the game directory to the given user-provided value.
@@ -111,8 +133,23 @@ func _on_change_game_directory_pressed() -> void:
 
 
 ## Called when the user requests to view the editor help documentation.
-func _on_open_editor_help_documentation() -> void:
+func _on_open_editor_help_documentation_pressed() -> void:
 	_open_help_documentation()
+
+
+## Called when the user requests to view the modding resources.
+func _on_open_modding_resources_pressed() -> void:
+	_open_modding_resources()
+
+
+## Called when the user requests to view the app's information.
+func _on_about_pressed() -> void:
+	_show_about_details()
+
+
+## Called when the user requests to configure the application.
+func _on_configure_pressed() -> void:
+	_show_configure_dialog()
 
 
 ## Called when the user selects a new game directory.
@@ -126,5 +163,5 @@ func _on_game_directory_selected(status: bool,
 
 
 ## Called when the user dismisses the invalid game directory dialog.
-func _on_invalid_game_directory_dialog_dismissed(_selection: int) -> void:
+func _on_invalid_game_directory_dialog_dismissed() -> void:
 	_prompt_for_new_game_directory()
