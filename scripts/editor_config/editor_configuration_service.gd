@@ -4,10 +4,12 @@ extends Object
 
 const _EDITOR_CONTEXT: String = "editor"
 const _SAVE_MANAGER_CONTEXT: String = "save_manager"
+const _CONFIG_FORMAT_REVISION_KEY: String = "config_format_revision"
 const _GAME_INSTALL_DIRECTORY_KEY: String = "game_install_directory"
 const _AUTOMATIC_GAME_SAVE_SYNC_INTERVAL_KEY: String = "automatic_game_save_sync_interval"
 const _AUTOMATIC_GAME_SAVE_SYNC_ENABLED_KEY: String = "automatic_game_save_sync_enabled"
 const _EDITOR_GAME_DIRECTORY: String =  ".rivermod"
+const _CONFIG_FORMAT_REVISION: int = 1
 
 var _editor_configuration_source: EditorConfigurationSource = null
 var _loaded: bool = false
@@ -77,3 +79,7 @@ func _load_configuration() -> void:
 	if not _loaded:
 		_editor_configuration_source.reload()
 		_loaded = true
+		
+		var config_format_revision: int = _editor_configuration_source.get_configuration(_EDITOR_CONTEXT, _CONFIG_FORMAT_REVISION_KEY, _CONFIG_FORMAT_REVISION)
+		if config_format_revision > _CONFIG_FORMAT_REVISION:
+			print("Editor config revision is newer than current; was %d; expected %d " % [config_format_revision, _CONFIG_FORMAT_REVISION])
