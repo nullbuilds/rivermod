@@ -23,9 +23,16 @@ static func get_data_save_file_name(slot: int) -> String:
 	return _DATA_SAVE_FILE_PATTERN % slot
 
 
+## Returns the name of the DirectX version of Riverworld's executable.
+static func get_direct_x_executable_name() -> String:
+	return _DIRECT_X_EXECUTABLE_NAME
+
+
 ## Checks if the given path is a Riverworld install directory.
+@warning_ignore("unused_parameter")
 func is_install_directory(path: String) -> bool:
-	return has_file(path.path_join(_DIRECT_X_EXECUTABLE_NAME))
+	assert(false, "Not implemented")
+	return false
 
 
 ## Returns if the given file exists.

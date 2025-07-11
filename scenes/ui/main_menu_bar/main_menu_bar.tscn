@@ -14,17 +14,24 @@ layout_mode = 2
 
 [node name="MenuBar" type="MenuBar" parent="PanelContainer"]
 layout_mode = 2
+flat = true
 
 [node name="EditorPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
 unique_name_in_owner = true
 title = "Editor"
-item_count = 1
+item_count = 2
 item_0/text = "Set Game Directory"
 item_0/id = 0
+item_1/text = "Configure..."
+item_1/id = 1
 
 [node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
 unique_name_in_owner = true
 title = "Help"
-item_count = 1
+item_count = 3
 item_0/text = "Online Documentation"
 item_0/id = 0
+item_1/text = "Modding Resources"
+item_1/id = 1
+item_2/text = "About"
+item_2/id = 2
