@@ -5,6 +5,9 @@ extends MarginContainer
 ## Emitted when the user selects the help documentation option.
 signal editor_help_documentation_pressed()
 
+## Emitted when the user selects the editor configuration option.
+signal editor_configure_pressed()
+
 ## Emitted when the user chooses the option to change the game directory.
 signal editor_game_directory_pressed()
 
@@ -15,6 +18,7 @@ signal modding_resources_pressed()
 signal about_pressed()
 
 const _EDITOR_GAME_DIRECTORY_ID: int = 0
+const _EDITOR_CONFIGURE_ID: int = 1
 const _HELP_DOCUMENTATION_ID: int = 0
 const _HELP_MODDING_RESOURCES_ID: int = 1
 const _HELP_ABOUT_ID: int = 2
@@ -33,7 +37,8 @@ func _on_editor_id_pressed(id: int) -> void:
 	match(id):
 		_EDITOR_GAME_DIRECTORY_ID:
 			editor_game_directory_pressed.emit()
-			
+		_EDITOR_CONFIGURE_ID:
+			editor_configure_pressed.emit()
 
 
 ## Called when a help menu item is pressed.

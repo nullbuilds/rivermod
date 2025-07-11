@@ -19,9 +19,11 @@ flat = true
 [node name="EditorPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
 unique_name_in_owner = true
 title = "Editor"
-item_count = 1
+item_count = 2
 item_0/text = "Set Game Directory"
 item_0/id = 0
+item_1/text = "Configure..."
+item_1/id = 1
 
 [node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
 unique_name_in_owner = true
