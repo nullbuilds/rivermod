@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=3 uid="uid://673mcsqgjbp0"]
+
+[ext_resource type="Script" uid="uid://b5tsn8ls34bmj" path="res://scenes/main.gd" id="1_rb8cp"]
+[ext_resource type="Material" uid="uid://lpft7rly6rrl" path="res://scenes/default_material.tres" id="3_3oihp"]
+[ext_resource type="Script" uid="uid://c57vl0pvkt8df" path="res://scenes/user_interface.gd" id="4_2eek5"]
+[ext_resource type="Shader" uid="uid://bbmn0w17aj2go" path="res://scenes/cloud_shader.gdshader" id="4_ci4pi"]
+[ext_resource type="Texture2D" uid="uid://c0b3lo4ftlhxq" path="res://scenes/grid.png" id="4_urotc"]
+
+[sub_resource type="Environment" id="Environment_tbgi4"]
+background_energy_multiplier = 0.37
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.203922, 0.505882, 0.690196, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjaoe"]
+transparency = 1
+albedo_texture = ExtResource("4_urotc")
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 0.5
+rim_enabled = true
+rim_tint = 1.0
+uv1_scale = Vector3(16, 16, 4)
+texture_filter = 1
+distance_fade_mode = 2
+distance_fade_min_distance = 1200.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i2smb"]
+material = SubResource("StandardMaterial3D_pjaoe")
+size = Vector2(1600, 1600)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ausx"]
+render_priority = 0
+shader = ExtResource("4_ci4pi")
+shader_parameter/fog_color = Color(0, 0.133333, 0.423529, 1)
+shader_parameter/fog_intensity = 0.3
+shader_parameter/scale = 0.1
+shader_parameter/timescale = 0.05
+shader_parameter/hScrollSpeedFactor = 0.5
+shader_parameter/vScrollSpeedFactor = 1.0
+shader_parameter/entropyFactor = 1.0
+shader_parameter/sharpness = 10.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s2rat"]
+material = SubResource("ShaderMaterial_1ausx")
+size = Vector2(3600, 2400)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_rb8cp")
+default_material = ExtResource("3_3oihp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbgi4")
+
+[node name="ModelContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.67877, 118.383, 303.114)
+current = true
+
+[node name="Grid" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_i2smb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.892641, 0.450769, 0, -0.450769, 0.892641, 0, 165, 330)
+
+[node name="Sky" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 500, 0)
+mesh = SubResource("PlaneMesh_s2rat")
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_2eek5")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="UserInterface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UserInterface/VSplitContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="ModelOptionButton" type="OptionButton" parent="UserInterface/VSplitContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RenderModeOptionButton" type="OptionButton" parent="UserInterface/VSplitContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ElementOptionButton" type="OptionButton" parent="UserInterface/VSplitContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ObjectItemList" type="ItemList" parent="UserInterface/VSplitContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VSplitContainer"]
+layout_mode = 2
+
+[node name="CopyMessagesButton" type="Button" parent="UserInterface/VSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Copy all"
+
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MessageLogTextBox" type="RichTextLabel" parent="UserInterface/VSplitContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[connection signal="element_selected" from="UserInterface" to="." method="_on_user_interface_element_selected"]
+[connection signal="model_file_selected" from="UserInterface" to="." method="_on_user_interface_model_file_selected"]
+[connection signal="render_mode_selected" from="UserInterface" to="." method="_on_user_interface_render_mode_selected"]
+[connection signal="visible_objects_changed" from="UserInterface" to="." method="_on_user_interface_visible_objects_changed"]
+[connection signal="item_selected" from="UserInterface/VSplitContainer/VBoxContainer2/ModelOptionButton" to="UserInterface" method="_on_model_option_button_item_selected"]
+[connection signal="item_selected" from="UserInterface/VSplitContainer/VBoxContainer2/RenderModeOptionButton" to="UserInterface" method="_on_render_mode_button_item_selected"]
+[connection signal="item_selected" from="UserInterface/VSplitContainer/VBoxContainer2/ElementOptionButton" to="UserInterface" method="_on_element_option_button_item_selected"]
+[connection signal="multi_selected" from="UserInterface/VSplitContainer/VBoxContainer2/ObjectItemList" to="UserInterface" method="_on_object_item_list_multi_selected"]
+[connection signal="pressed" from="UserInterface/VSplitContainer/VBoxContainer/CopyMessagesButton" to="UserInterface" method="_on_copy_messages_button_pressed"]

@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=3 uid="uid://nb16vfd5q0rg"]
+
+[ext_resource type="Script" uid="uid://bgxsnh32vb2li" path="res://main.gd" id="1_hbnif"]
+[ext_resource type="Script" uid="uid://ncyygu7y6xe7" path="res://camera.gd" id="4_imjtu"]
+
+[sub_resource type="Environment" id="Environment_v7enm"]
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dlhhc"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_hbnif")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v7enm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.501737, 0.86502, 0, -0.86502, 0.501737, 28.5978, 110.551, 203.696)
+light_energy = 0.3
+light_indirect_energy = 0.1
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_blur = 4.619
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 512.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.808021, 0.589154, 0, -0.589154, 0.808021, 0, 118.136, 193.788)
+current = true
+script = ExtResource("4_imjtu")
+
+[node name="MapContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -128, 0, -128)
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScriptSelectButton" type="OptionButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MapSelectButton" type="OptionButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="RenderModeOptionButton" type="OptionButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WrapEdgesButton" type="CheckButton" parent="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Wrap edges"
+
+[node name="Control" type="Control" parent="UserInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FogOfWarToggleButton" type="CheckButton" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fog of War"
+
+[node name="Control" type="Control" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Minimap" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 200.0
+size_flags_vertical = 3
+texture = SubResource("PlaceholderTexture2D_dlhhc")
+expand_mode = 5
+
+[node name="FogOfWar" type="TextureRect" parent="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 200.0
+expand_mode = 5
+
+[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/ScriptSelectButton" to="." method="_on_script_select_button_item_selected"]
+[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/MapSelectButton" to="." method="_on_map_select_button_item_selected"]
+[connection signal="item_selected" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/RenderModeOptionButton" to="." method="_on_render_mode_option_button_item_selected"]
+[connection signal="toggled" from="UserInterface/VBoxContainer/HBoxContainer/VBoxContainer/WrapEdgesButton" to="." method="_on_wrap_edges_button_toggled"]
+[connection signal="toggled" from="UserInterface/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/FogOfWarToggleButton" to="." method="_on_fog_of_war_toggle_button_toggled"]
