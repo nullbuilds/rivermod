@@ -37,4 +37,6 @@ author_link="https://nullbuilds.github.io/"
 github_link="https://github.com/nullbuilds/rivermod/tree/main"
 modding_resources_link="https://github.com/nullbuilds/rivermod/wiki/Modding-resources"
 copyright="2025 Null Builds (Charles)"
-usage_credits=PackedStringArray("Kenney game assets (https://kenney.nl/assets)")
+usage_credits=PackedStringArray("Kenney game assets (https://kenney.nl/assets)", "Wireframe Shader by Melisek (https://godotshaders.com/shader/wireframe-shader/)", "Noraml Shader by ualac (https://www.reddit.com/r/godot/comments/te4bmc/comment/i0nygem/)", "SHARD NOISE by ENDESGA (https://www.shadertoy.com/view/dlKyWw)", "Noise - Gabor - 2D shader - Deriv by iq (https://www.shadertoy.com/view/clGyWm)")
+external_tools_directory="tools"
+external_tools_directory.debug="export/windows/tools"

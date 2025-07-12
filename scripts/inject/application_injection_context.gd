@@ -10,6 +10,7 @@ func configure_bindings(binder: InjectionBinder) -> void:
 	binder.bind(GameFileSource, _provide_game_file_source)
 	binder.bind(EditorFileSource, _provide_editor_file_source)
 	binder.bind(AsyncSaveManagementService, _provide_async_save_management_service)
+	binder.bind(ExternalToolsService, _provide_external_tools_service)
 
 
 ## Provides an AsyncSaveManagementService.
@@ -50,3 +51,9 @@ func _provide_game_file_source(injector: Injector) -> GameFileSource:
 func _provide_editor_configuration_service(_injector: Injector) -> EditorConfigurationService:
 	var config_source: EditorConfigurationSource = ConfigFileEditorConfigurationSource.new(_EDITOR_CONFIG_FILE_PATH)
 	return EditorConfigurationService.new(config_source)
+
+
+## Provides a ExternalToolsService instance.
+func _provide_external_tools_service(injector: Injector) -> ExternalToolsService:
+	var config_service: EditorConfigurationService = injector.provide(EditorConfigurationService)
+	return ExternalToolsService.new(config_service)
