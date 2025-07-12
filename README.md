@@ -2,7 +2,7 @@
   <h1 align = "center">Rivermod</h1>
 </p>
 <p align="center">
-  Unofficial modding tools and resources for the 1998 strategy game, [Riverworld].
+  Unofficial modding tools and resources for the 1998 strategy game, <a href="https://www.igdb.com/games/philip-jose-farmers-riverworld" target="_blank">Riverworld</a>.
 </p>
 
 ![thumbnail]
@@ -40,7 +40,6 @@ Contributions are always welcome! Check out the [contributing guide][contributin
 
 Made with :heart: using [Godot]
 
-[riverworld]: https://www.igdb.com/games/philip-jose-farmers-riverworld
 [contributing-guide]: .github/CONTRIBUTING.md
 [download]: https://github.com/nullbuilds/rivermod/releases/latest
 [wiki]: https://github.com/nullbuilds/rivermod/wiki
