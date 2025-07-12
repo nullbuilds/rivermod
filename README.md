@@ -2,7 +2,7 @@
   <h1 align = "center">Rivermod</h1>
 </p>
 <p align="center">
-  Modding tools and resources for the 1998 strategy game, [Riverworld].
+  Unofficial modding tools and resources for the 1998 strategy game, [Riverworld].
 </p>
 
 ![thumbnail]
