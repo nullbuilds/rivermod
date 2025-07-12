@@ -7,6 +7,7 @@ var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
 var _game_file_source: GameFileSource = null
 var _config_app_dialog: ConfigAppDialog = null
+var _external_tools_service: ExternalToolsService = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
 @onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
@@ -24,6 +25,8 @@ func _ready() -> void:
 	_main_menu_bar.modding_resources_pressed.connect(_on_open_modding_resources_pressed)
 	_main_menu_bar.about_pressed.connect(_on_about_pressed)
 	_main_menu_bar.editor_configure_pressed.connect(_on_configure_pressed)
+	_main_menu_bar.map_viewer_pressed.connect(_on_map_viewer_pressed)
+	_main_menu_bar.model_viewer_pressed.connect(_on_model_viewer_pressed)
 	_invalid_game_directory_dialog.dismissed.connect(_on_invalid_game_directory_dialog_dismissed)
 	
 	# Setup dependency injection
@@ -31,6 +34,7 @@ func _ready() -> void:
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
 	_game_file_source = _injector.provide(GameFileSource)
+	_external_tools_service = _injector.provide(ExternalToolsService)
 	_config_app_dialog = _injector.provide_scene(_config_app_dialog_scene)
 	
 	# Start services
@@ -77,6 +81,7 @@ func _start_services() -> void:
 ## Stops running services.
 func _stop_services() -> void:
 	_save_manager.stop()
+	_external_tools_service.stop()
 
 
 ## Opens the online editor help documentation.
@@ -127,6 +132,16 @@ func _update_game_directory(new_directory: String) -> void:
 		get_tree().paused = false
 
 
+## Launches the map viewer.
+func _launch_map_viewer() -> void:
+	_external_tools_service.launch_map_viewer()
+
+
+## Launches the map viewer.
+func _launch_model_viewer() -> void:
+	_external_tools_service.launch_model_viewer()
+
+
 ## Called when the user requests to change the game directory
 func _on_change_game_directory_pressed() -> void:
 	_prompt_for_new_game_directory()
@@ -165,3 +180,13 @@ func _on_game_directory_selected(status: bool,
 ## Called when the user dismisses the invalid game directory dialog.
 func _on_invalid_game_directory_dialog_dismissed() -> void:
 	_prompt_for_new_game_directory()
+
+
+## Called when the user chooses to open the map viewer.
+func _on_map_viewer_pressed() -> void:
+	_launch_map_viewer()
+
+
+## Called when the user chooses to open the model viewer.
+func _on_model_viewer_pressed() -> void:
+	_launch_model_viewer()
