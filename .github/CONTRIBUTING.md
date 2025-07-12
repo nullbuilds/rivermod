@@ -24,7 +24,7 @@ Any contribution which attempts to bypass or document steps to bypass Riverworld
 
 To honor and respect the rights of copyright holders, contributions which include copyrighted material anywhere in the commit history (including assets from the game) will not be approved unless the asset owner has given explicit consent to do so with a verifiable publicly viewable license compatible with this project's MIT license.
 
-Finally, no contribution created in part using generative AI will be permitted regardless of any copyright release claims made by the tool's provider.
+Finally, no audio, visual, or code contributions created using generative AI will be permitted regardless of any copyright release claims made by the tool's provider. Using generative AI to research and inform coding decisions is permitted so long as the output of the generative AI tool is not copied.
 
 ### File format documentation
 
