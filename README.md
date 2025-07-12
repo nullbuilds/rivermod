@@ -5,6 +5,8 @@ Modding tools and resources for the 1998 strategy game, [Riverworld].
 ## Features
 
 * Save game manager with automatic backups
+* Map viewer
+* Model viewer
 
 ## Modding resources
 
@@ -13,6 +15,12 @@ Check out the project [wiki] for tons of resources including:
 * Tips and strategy guides
 * File structures
 * and more!
+
+## Planned features
+
+* Mod loader/packager
+* Model exporter
+* Level editor
 
 ## Contributing
 
