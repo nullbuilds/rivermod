@@ -1,6 +1,24 @@
-# Rivermod
+<p align="center">
+  <h1 align = "center">Rivermod</h1>
+</p>
+<p align="center">
+  Modding tools and resources for the 1998 strategy game, [Riverworld].
+</p>
 
-Modding tools and resources for the 1998 strategy game, [Riverworld].
+![thumbnail]
+
+## Download
+
+[Download Rivermod][download]
+
+## Documentation
+
+Check out the project [wiki] for tons of resources including:
+* How to install and run the game
+* How to use Rivermod
+* Tips and strategy guides for gameplay
+* Riverworld's file structures
+* and more!
 
 ## Features
 
@@ -8,15 +26,9 @@ Modding tools and resources for the 1998 strategy game, [Riverworld].
 * Map viewer
 * Model viewer
 
-## Modding resources
-
-Check out the project [wiki] for tons of resources including:
-* How to install and run the game
-* Tips and strategy guides
-* File structures
-* and more!
-
 ## Planned features
+
+The following features are planned but not yet implemented:
 
 * Mod loader/packager
 * Model exporter
@@ -26,6 +38,11 @@ Check out the project [wiki] for tons of resources including:
 
 Contributions are always welcome! Check out the [contributing guide][contributing-guide] to get started.
 
+Made with :heart: using [Godot]
+
 [riverworld]: https://www.igdb.com/games/philip-jose-farmers-riverworld
 [contributing-guide]: .github/CONTRIBUTING.md
+[download]: https://github.com/nullbuilds/rivermod/releases/latest
 [wiki]: https://github.com/nullbuilds/rivermod/wiki
+[godot]: https://godotengine.org/
+[thumbnail]: docs/img/thumbnail.png
