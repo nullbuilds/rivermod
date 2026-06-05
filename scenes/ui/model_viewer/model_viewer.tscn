@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://673mcsqgjbp0"]
+
+[ext_resource type="Script" uid="uid://b5tsn8ls34bmj" path="res://scenes/ui/model_viewer/model_viewer.gd" id="1_rb8cp"]
+[ext_resource type="PlaneMesh" uid="uid://d3mjmdu737oh3" path="res://resources/meshes/model_viewer_grid_mesh.tres" id="2_54d2k"]
+[ext_resource type="Environment" uid="uid://ckya6gyy4p52o" path="res://resources/environments/model_viewer_environment.tres" id="2_oj5fw"]
+[ext_resource type="PlaneMesh" uid="uid://babpqjerm2d48" path="res://resources/meshes/model_viewer_sky_mesh.tres" id="3_oj5fw"]
+
+[node name="ModelViewer" type="Window" unique_id=1598218246]
+oversampling_override = 1.0
+script = ExtResource("1_rb8cp")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2105403593]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=1038147402]
+environment = ExtResource("2_oj5fw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=766856317]
+transform = Transform3D(1, 0, 0, 0, 0.89264077, 0.4507689, 0, -0.4507689, 0.89264077, 0, 165, 330)
+
+[node name="MainCamera" type="Camera3D" parent="Node3D" unique_id=1807913880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.67877, 118.383, 303.114)
+current = true
+
+[node name="Grid" type="MeshInstance3D" parent="Node3D" unique_id=372266000]
+mesh = ExtResource("2_54d2k")
+
+[node name="Sky" type="MeshInstance3D" parent="Node3D" unique_id=1171993773]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 500, 0)
+mesh = ExtResource("3_oj5fw")
+
+[node name="ModelContainer" type="Node3D" parent="Node3D" unique_id=1578653487]
+unique_name_in_owner = true

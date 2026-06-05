@@ -1,5 +1,5 @@
 class_name SaveArchiveManifest
-extends Object
+extends RefCounted
 ## Represents a save archive manifest.
 
 const _CURRENT_FORMAT_REVISION: int = 1

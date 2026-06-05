@@ -2,18 +2,22 @@ class_name Main
 extends Node
 ## The editor main scnee.
 
+const _CONFIG_APP_DIALOG_SCENE: PackedScene = preload("uid://cqljkl1fnt8sf")
+const _SAVE_MANAGE_SCENE: PackedScene = preload("uid://bv6yq75wbx36i")
+const _MAP_VIEWER_SCENE: PackedScene = preload("uid://nb16vfd5q0rg")
+const _MODEL_VIEWER_SCENE: PackedScene = preload("uid://673mcsqgjbp0")
+
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
 var _save_manager: AsyncSaveManagementService = null
 var _game_file_source: GameFileSource = null
 var _config_app_dialog: ConfigAppDialog = null
-var _external_tools_service: ExternalToolsService = null
+var _map_viewer: MapViewer = null
+var _model_viewer: ModelViewer = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
 @onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
 @onready var _invalid_game_directory_dialog: InvalidGameDirectoryDialog = %InvalidGameDirectoryDialog
-@onready var _config_app_dialog_scene: PackedScene = preload("res://scenes/ui/config_app_dialog/config_app_dialog.tscn")
-@onready var _save_manager_scene: PackedScene = preload("res://scenes/ui/save_manager/save_management_widget.tscn")
 
 ## Construct the main scene.
 func _ready() -> void:
@@ -34,15 +38,14 @@ func _ready() -> void:
 	_config_service = _injector.provide(EditorConfigurationService)
 	_save_manager = _injector.provide(AsyncSaveManagementService)
 	_game_file_source = _injector.provide(GameFileSource)
-	_external_tools_service = _injector.provide(ExternalToolsService)
-	_config_app_dialog = _injector.provide_scene(_config_app_dialog_scene)
+	_config_app_dialog = _injector.provide_scene(_CONFIG_APP_DIALOG_SCENE)
 	
 	# Start services
 	_start_services()
 	
 	# Construct UI
 	add_child(_config_app_dialog)
-	_content_container.add_child(_injector.provide_scene(_save_manager_scene))
+	_content_container.add_child(_injector.provide_scene(_SAVE_MANAGE_SCENE))
 
 
 ## Updates the editor to ensure a game directory is always set.
@@ -81,7 +84,6 @@ func _start_services() -> void:
 ## Stops running services.
 func _stop_services() -> void:
 	_save_manager.stop()
-	_external_tools_service.stop()
 
 
 ## Opens the online editor help documentation.
@@ -134,12 +136,25 @@ func _update_game_directory(new_directory: String) -> void:
 
 ## Launches the map viewer.
 func _launch_map_viewer() -> void:
-	_external_tools_service.launch_map_viewer()
+	if is_instance_valid(_map_viewer):
+		return
+	
+	_map_viewer = _injector.provide_scene(_MAP_VIEWER_SCENE)
+	_map_viewer.size = Vector2i(1024, 768)
+	_map_viewer.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	
+	add_child(_map_viewer)
 
 
 ## Launches the map viewer.
 func _launch_model_viewer() -> void:
-	_external_tools_service.launch_model_viewer()
+	if is_instance_valid(_model_viewer):
+		return
+	
+	_model_viewer = _injector.provide_scene(_MODEL_VIEWER_SCENE)
+	_model_viewer.size = Vector2i(1024, 768)
+	_model_viewer.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	add_child(_model_viewer)
 
 
 ## Called when the user requests to change the game directory

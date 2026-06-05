@@ -1,5 +1,5 @@
 class_name GameSaveDataRepository
-extends Object
+extends RefCounted
 ## Abstract repository for accessing save files from the game's installation.
 
 ## The total number of game save slots.

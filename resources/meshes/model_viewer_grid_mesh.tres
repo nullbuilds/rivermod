@@ -1,0 +1,7 @@
+[gd_resource type="PlaneMesh" format=3 uid="uid://d3mjmdu737oh3"]
+
+[ext_resource type="Material" uid="uid://bfy6m848glf5v" path="res://resources/materials/model_viewer_grid_material.tres" id="1_dh3yk"]
+
+[resource]
+material = ExtResource("1_dh3yk")
+size = Vector2(1600, 1600)

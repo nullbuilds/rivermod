@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://sydb650cxlw1"]
+
+[ext_resource type="Shader" uid="uid://bbmn0w17aj2go" path="res://resources/shaders/cloud_shader.gdshader" id="1_1a5dd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1a5dd")
+shader_parameter/fog_color = Color(0, 0.133333, 0.423529, 1)
+shader_parameter/fog_intensity = 0.3
+shader_parameter/scale = 0.1
+shader_parameter/timescale = 0.05
+shader_parameter/hScrollSpeedFactor = 0.5
+shader_parameter/vScrollSpeedFactor = 1.0
+shader_parameter/entropyFactor = 1.0
+shader_parameter/sharpness = 10.0

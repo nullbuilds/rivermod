@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bfy6m848glf5v"]
+
+[ext_resource type="Texture2D" uid="uid://c0b3lo4ftlhxq" path="res://resources/textures/model_ground_grid.png" id="1_hvsae"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_hvsae")
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 0.5
+rim_enabled = true
+rim_tint = 1.0
+uv1_scale = Vector3(16, 16, 4)
+texture_filter = 1
+distance_fade_mode = 2
+distance_fade_min_distance = 1200.0

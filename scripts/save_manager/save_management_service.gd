@@ -1,5 +1,5 @@
 class_name SaveManagementService
-extends Object
+extends RefCounted
 ## Service for managing the game's save files. Thread safe.
 
 ## Emitted when the save assigned to a slot changes.

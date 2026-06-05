@@ -1,5 +1,5 @@
 class_name AsyncSaveManagementService
-extends Object
+extends RefCounted
 ## Wrapper for the SaveManagementService which performs save management
 ## operations asynchronously.
 
