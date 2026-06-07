@@ -50,7 +50,7 @@ static func from_bytes(bytes: PackedByteArray) -> ParseContext:
 ## Any logged context events will be automatically included in the parent
 ## context.
 static func from_parent(parent: ParseContext, \
-		window_size: int) -> ParseContext:
+		window_size: int, offset: int = 0) -> ParseContext:
 	assert(null != parent, 'parent context must not be null')
 	
 	if window_size < 0:
@@ -58,18 +58,22 @@ static func from_parent(parent: ParseContext, \
 				window_size)
 		window_size = 0
 	
-	if not parent.has_remaining_bytes(window_size):
+	if offset < 0:
+		push_error("offset (%d) must not be negative; adjusted to 0" % offset)
+		offset = 0
+	
+	if not parent.has_remaining_bytes(window_size + offset):
 		var new_size: int = parent.get_remaining_bytes()
-		push_error('window_size (%d) would exceed the remaining size of the parent context; window_size has been truncated to %d' % \
-				[window_size, new_size])
+		push_error('window_size %d at offset %d would exceed the remaining size of the parent context; window_size has been truncated to %d' % \
+				[window_size, offset, new_size])
 		window_size = new_size
 	
-	var end_cursor: int = parent._current_position + window_size
+	var end_cursor: int = parent._current_position + window_size + offset
 	
 	var context: ParseContext = ParseContext.new()
 	context._buffer = parent._buffer
-	context._start_cursor = parent._current_position
-	context._current_position = parent._current_position
+	context._start_cursor = parent._current_position + offset
+	context._current_position = parent._current_position + offset
 	context._end_cursor = end_cursor
 	context._events = parent.get_events()
 	
@@ -110,6 +114,21 @@ func get_remaining_bytes() -> int:
 ## remaining.
 func has_remaining_bytes(bytes: int = 1) -> bool:
 	return get_remaining_bytes() >= bytes
+
+
+## Moves the cursor to the given byte offset.
+func move_cursor(offset: int) -> void:
+	var size: int = _end_cursor - _start_cursor
+	
+	if offset < 0:
+		push_error("offset must not be negative; was %d; clamped to 0" % offset)
+		offset = 0
+	elif offset >= size:
+		var adjusted_offset: int = clampi(size, _start_cursor, maxi(_end_cursor - 1, 0))
+		push_error("offset exceeds the context size %d; was %d; clamped to %d" % [size, offset, adjusted_offset])
+		offset = adjusted_offset
+	
+	_current_position = offset + _start_cursor
 
 
 ## Returns the next 32-bit litte-endian encoded unsigned integer from the
@@ -153,6 +172,16 @@ func next_u8le() -> int:
 	
 	var value = _buffer.decode_u8(_current_position)
 	_current_position += 1
+	return value
+
+
+## Returns the next 16-bit litte-endian encoded unsigned integer from the
+## context but does not advance the cursor.
+func peek_u16le() -> int:
+	assert(has_remaining_bytes(2), 'Insufficient bytes remaining to decode a u16le; %d remaining' % \
+			get_remaining_bytes())
+	
+	var value: int = _buffer.decode_u16(_current_position)
 	return value
 
 
