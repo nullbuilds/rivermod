@@ -1,5 +1,5 @@
 class_name GameFileSource
-extends Object
+extends RefCounted
 ## Abstract class for accessing game files.
 
 const _MAP_SAVE_FILE_PATTERN: String = "MAP0%d.SAV"

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c6ci7jbbourh2"]
+
+[ext_resource type="Script" uid="uid://di2bjwr5powya" path="res://scenes/ui/sprite_viewer/sprite_viewer.gd" id="1_rhllo"]
+
+[node name="SpriteViewer" type="Window" unique_id=431525132]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+script = ExtResource("1_rhllo")
+
+[node name="SpriteFileDialog" type="FileDialog" parent="." unique_id=407259177]
+unique_name_in_owner = true
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.SPR")
+use_native_dialog = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=915226527]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuBar" type="MenuBar" parent="VBoxContainer" unique_id=1046313335]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FilePopupMenu" type="PopupMenu" parent="VBoxContainer/MenuBar" unique_id=1196681816]
+unique_name_in_owner = true
+title = "File"
+item_count = 1
+item_0/text = "Load sheet"
+item_0/id = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1048673553]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="SpriteContainer" type="HFlowContainer" parent="VBoxContainer/ScrollContainer" unique_id=1508157188]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

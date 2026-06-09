@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bqwrhkm3dno8k"]
+
+[ext_resource type="Script" uid="uid://c57vl0pvkt8df" path="res://scenes/ui/model_viewer/model_viewer_ui/model_viewer_user_interface.gd" id="1_tl3yd"]
+
+[node name="ModelViewerUserInterface" type="CanvasLayer" unique_id=1472058346]
+script = ExtResource("1_tl3yd")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="." unique_id=1109552840]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VSplitContainer" unique_id=1819483550]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="ModelOptionButton" type="OptionButton" parent="VSplitContainer/VBoxContainer2" unique_id=607922]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RenderModeOptionButton" type="OptionButton" parent="VSplitContainer/VBoxContainer2" unique_id=549407400]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ElementOptionButton" type="OptionButton" parent="VSplitContainer/VBoxContainer2" unique_id=523418668]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ObjectItemList" type="ItemList" parent="VSplitContainer/VBoxContainer2" unique_id=1412824048]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer" unique_id=201445223]
+layout_mode = 2
+
+[node name="CopyMessagesButton" type="Button" parent="VSplitContainer/VBoxContainer" unique_id=675303790]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Copy all"
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer/VBoxContainer" unique_id=752655444]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MessageLogTextBox" type="RichTextLabel" parent="VSplitContainer/VBoxContainer/PanelContainer" unique_id=697038915]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true

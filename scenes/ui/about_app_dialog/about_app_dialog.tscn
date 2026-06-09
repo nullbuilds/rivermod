@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://de3n0w7q504cq"]
+[gd_scene format=3 uid="uid://de3n0w7q504cq"]
 
 [ext_resource type="Script" uid="uid://ct4s84uktqrdy" path="res://scenes/ui/about_app_dialog/about_app_dialog.gd" id="1_as1rl"]
 
-[node name="AboutAppDialog" type="Window"]
+[node name="AboutAppDialog" type="Window" unique_id=396414214]
+oversampling_override = 1.0
 title = "About"
 initial_position = 2
 size = Vector2i(800, 350)
@@ -12,7 +13,7 @@ popup_window = true
 min_size = Vector2i(800, 350)
 script = ExtResource("1_as1rl")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1995774326]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,10 +23,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"WindowMarginContainer"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1596495625]
 layout_mode = 2
 
-[node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="VersionLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1110205458]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -34,7 +35,7 @@ text = "Rivermod"
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="CopyrightLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CopyrightLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1474448493]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -43,10 +44,10 @@ text = "©"
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=801995239]
 layout_mode = 2
 
-[node name="CreditsLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CreditsLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1568204199]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -56,7 +57,7 @@ text = "Uses:"
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2058341976]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4

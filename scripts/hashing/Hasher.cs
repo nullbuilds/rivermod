@@ -7,12 +7,12 @@ using System.IO.Hashing;
 /// </summary>
 public partial class Hasher : GodotObject
 {
-    /// <summary>
-    /// Provides access to high-performance hashing functions.
-    /// </summary>
-    public static String Hash(byte[] data)
-    {
-        byte[] hashValue = XxHash3.Hash(data);
-        return BitConverter.ToString(hashValue).Replace("-", "");
-    }
+	/// <summary>
+	/// Provides access to high-performance hashing functions.
+	/// </summary>
+	public static String Hash(byte[] data)
+	{
+		byte[] hashValue = XxHash3.Hash(data);
+		return BitConverter.ToString(hashValue).Replace("-", "");
+	}
 }

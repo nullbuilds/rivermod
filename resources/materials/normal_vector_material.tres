@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d0rxsidmcoaad"]
+
+[ext_resource type="Shader" uid="uid://ba0crd6p6627y" path="res://resources/shaders/normal_vector_shader.gdshader" id="1_woo1u"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_woo1u")
+shader_parameter/world_space = true
+shader_parameter/remap_range = true

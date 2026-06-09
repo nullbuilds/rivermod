@@ -1,0 +1,7 @@
+[gd_resource type="PlaneMesh" format=3 uid="uid://babpqjerm2d48"]
+
+[ext_resource type="Material" uid="uid://sydb650cxlw1" path="res://resources/materials/cloud_material.tres" id="1_3xlnm"]
+
+[resource]
+material = ExtResource("1_3xlnm")
+size = Vector2(3600, 2400)

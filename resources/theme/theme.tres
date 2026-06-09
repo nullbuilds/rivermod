@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cvejn2drs4byl"]
+[gd_resource type="Theme" format=3 uid="uid://cvejn2drs4byl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqu5r"]
 bg_color = Color(0.7, 0.084, 0.084, 1)
@@ -52,6 +52,15 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33e2g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19399999, 0.36213335, 0.97, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fq5a"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -99,6 +108,8 @@ SettingGridContainer/base_type = &"GridContainer"
 SettingGridContainer/constants/h_separation = 32
 SolidPopupPanel/base_type = &"PopupPanel"
 SolidPopupPanel/styles/panel = SubResource("StyleBoxFlat_0uiih")
+SpriteDimensionsPanelContainer/base_type = &"PanelContainer"
+SpriteDimensionsPanelContainer/styles/panel = SubResource("StyleBoxFlat_33e2g")
 WidgetMarginContainer/base_type = &"MarginContainer"
 WidgetMarginContainer/constants/margin_bottom = 4
 WidgetMarginContainer/constants/margin_left = 4

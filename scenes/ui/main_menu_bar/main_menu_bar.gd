@@ -23,10 +23,14 @@ signal map_viewer_pressed()
 ## Emitted when the user chooses to open the model viewer.
 signal model_viewer_pressed()
 
+## Emitted when the user chooses to open the sprite viewer.
+signal sprite_viewer_pressed()
+
 const _EDITOR_GAME_DIRECTORY_ID: int = 0
 const _EDITOR_CONFIGURE_ID: int = 1
 const _TOOL_MAP_VIEWER: int = 0
 const _TOOL_MODEL_VIEWER: int = 1
+const _TOOL_SPRITE_VIEWER: int = 2
 const _HELP_DOCUMENTATION_ID: int = 0
 const _HELP_MODDING_RESOURCES_ID: int = 1
 const _HELP_ABOUT_ID: int = 2
@@ -58,6 +62,8 @@ func _on_tools_id_pressed(id: int) -> void:
 			map_viewer_pressed.emit()
 		_TOOL_MODEL_VIEWER:
 			model_viewer_pressed.emit()
+		_TOOL_SPRITE_VIEWER:
+			sprite_viewer_pressed.emit()
 
 
 ## Called when a help menu item is pressed.

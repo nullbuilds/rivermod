@@ -1,5 +1,5 @@
 class_name Injector
-extends Object
+extends RefCounted
 ## A basic singleton dependency inector. All operations are thread-safe.
 
 var _class_instance_mapping: Dictionary[Object, Object] = {}

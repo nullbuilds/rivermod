@@ -1,5 +1,5 @@
 class_name EditorConfigurationSource
-extends Object
+extends RefCounted
 ## Abstract source for editor configuration settings.
 
 ## Gets the given configuration value or returns the default if not defined.

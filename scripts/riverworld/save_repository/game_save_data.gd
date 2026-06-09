@@ -1,5 +1,5 @@
 class_name GameSaveData
-extends Object
+extends RefCounted
 ## Encapsulates the save data for a single save slot.
 
 var _last_modified_time: int = -1

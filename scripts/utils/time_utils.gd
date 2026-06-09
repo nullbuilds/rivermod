@@ -1,5 +1,5 @@
 class_name TimeUtils
-extends Object
+extends RefCounted
 ## Utilities for dealing with time.
 
 ## Gets the string representation of the given date.

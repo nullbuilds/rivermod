@@ -1,5 +1,5 @@
 class_name EditorConfigurationService
-extends Object
+extends RefCounted
 ## Service for providing access to editor configurations.
 
 const _EDITOR_CONTEXT: String = "editor"
