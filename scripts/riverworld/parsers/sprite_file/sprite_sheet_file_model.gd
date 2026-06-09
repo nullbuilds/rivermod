@@ -13,15 +13,21 @@ static func parse(context: ParseContext) -> SpriteSheetFileModel:
 		context.log_error("Unable to parse sprite sheet; insufficient bytes (%d) for a header" % remaining_bytes)
 		return null
 	var header_length: int = context.next_u16le()
+	var remaining_header_length: int = header_length - 2
+	if header_length < 2:
+		context.log_error("Unable to parse sprite sheet; header size is invalid; was %d" % header_length)
+		return null
+	elif header_length == 2:
+		context.log_warning("Sprite sheet header contains no data")
 	
 	var sprite_sheet: SpriteSheetFileModel = SpriteSheetFileModel.new()
 	
 	# Read the header bytes
-	if not context.has_remaining_bytes(header_length):
+	if not context.has_remaining_bytes(remaining_header_length):
 		var remaining_bytes: int = context.get_remaining_bytes()
-		context.log_error("Unable to parse sprite sheet; insufficient remaining bytes (%d) for header %d" % [remaining_bytes, header_length])
+		context.log_error("Unable to parse sprite sheet; insufficient remaining bytes (%d) for header %d" % [remaining_bytes, remaining_header_length])
 		return sprite_sheet
-	sprite_sheet._header_bytes = context.next_bytes(header_length).duplicate()
+	sprite_sheet._header_bytes = context.next_bytes(remaining_header_length).duplicate()
 	
 	# Read sprite offset table position
 	var sprite_offset_table_start: int = context.get_read_bytes()
@@ -95,6 +101,16 @@ func get_header() -> PackedByteArray:
 	return _header_bytes
 
 
+## Returns the largest width and height of all contained sprites.
+func get_max_size() -> Vector2i:
+	var max_size: Vector2i = Vector2i.ZERO
+	for sprite in _sprites:
+		var sprite_size: Vector2i = sprite.get_size()
+		max_size = max_size.max(sprite_size)
+	
+	return max_size
+
+
 ## Represents a single sprite within the sheet.
 class SpriteModel extends RefCounted:
 	var _size: Vector2i = Vector2i.ZERO
@@ -158,32 +174,3 @@ class SpriteModel extends RefCounted:
 	## Returns the value of the second unknown header field.
 	func get_unknown_field_b() -> int:
 		return _unknown_field_b
-	
-	
-	## Converts the sprite to an image.
-	## 
-	## If the provided [param color_table] does not contain enough colors,
-	## [param missing_color] will be used for the missing colors.
-	func to_image(color_table: PackedColorArray, missing_color: Color = Color.MAGENTA) -> Image:
-		var modified_color_table: PackedColorArray = color_table.duplicate()
-		
-		var table_size: int = color_table.size()
-		var sprite_palette_size: int = get_color_palette_size()
-		if sprite_palette_size > table_size:
-			push_error("color_table does not contain enough colors to display sprite; table size is %d; sprite palette is %d colors" % [table_size, sprite_palette_size])
-			var size_difference: int = sprite_palette_size - table_size
-			var missing_colors: PackedColorArray = PackedColorArray()
-			missing_colors.resize(size_difference)
-			missing_colors.fill(missing_color)
-			modified_color_table.append_array(missing_colors)
-		
-		var image: Image = Image.create_empty(_size.x, _size.y, false, Image.FORMAT_RGBA8)
-		for column in _size.x:
-			for row in _size.y:
-				var pixel_index: int = row * _size.x + column
-				var pixel_color_index: int = _pixel_color_indices.get(pixel_index)
-				var color: Color = modified_color_table.get(pixel_color_index)
-				
-				image.set_pixel(column, row, color)
-		
-		return image

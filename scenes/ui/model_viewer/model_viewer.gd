@@ -17,6 +17,7 @@ var _user_interface: ModelViewerUserInterface = null
 @onready var _model: Node3D = %ModelContainer
 
 func _ready():
+	title = "Model Viewer"
 	own_world_3d = true
 	
 	_user_interface = _injector.provide_scene(_MODEL_VIEWER_USER_INTERFACE_SCENE)

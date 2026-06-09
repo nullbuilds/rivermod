@@ -6,6 +6,7 @@ const _CONFIG_APP_DIALOG_SCENE: PackedScene = preload("uid://cqljkl1fnt8sf")
 const _SAVE_MANAGE_SCENE: PackedScene = preload("uid://bv6yq75wbx36i")
 const _MAP_VIEWER_SCENE: PackedScene = preload("uid://nb16vfd5q0rg")
 const _MODEL_VIEWER_SCENE: PackedScene = preload("uid://673mcsqgjbp0")
+const _SPRITE_VIEWER_SCENE: PackedScene = preload("uid://c6ci7jbbourh2")
 
 var _injector: Injector = null
 var _config_service: EditorConfigurationService = null
@@ -14,6 +15,7 @@ var _game_file_source: GameFileSource = null
 var _config_app_dialog: ConfigAppDialog = null
 var _map_viewer: MapViewer = null
 var _model_viewer: ModelViewer = null
+var _sprite_viewer: SpriteViewer = null
 @onready var _content_container: MarginContainer = %ContentContainer
 @onready var _main_menu_bar: MainMenuBar = %MainMenuBar
 @onready var _about_app_dialog: AboutAppDialog = %AboutAppDialog
@@ -31,6 +33,7 @@ func _ready() -> void:
 	_main_menu_bar.editor_configure_pressed.connect(_on_configure_pressed)
 	_main_menu_bar.map_viewer_pressed.connect(_on_map_viewer_pressed)
 	_main_menu_bar.model_viewer_pressed.connect(_on_model_viewer_pressed)
+	_main_menu_bar.sprite_viewer_pressed.connect(_on_sprite_viewer_pressed)
 	_invalid_game_directory_dialog.dismissed.connect(_on_invalid_game_directory_dialog_dismissed)
 	
 	# Setup dependency injection
@@ -157,6 +160,16 @@ func _launch_model_viewer() -> void:
 	add_child(_model_viewer)
 
 
+func _launch_sprite_viewer() -> void:
+	if is_instance_valid(_sprite_viewer):
+		return
+	
+	_sprite_viewer = _injector.provide_scene(_SPRITE_VIEWER_SCENE)
+	_sprite_viewer.size = Vector2i(1024, 768)
+	_sprite_viewer.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	add_child(_sprite_viewer)
+
+
 ## Called when the user requests to change the game directory
 func _on_change_game_directory_pressed() -> void:
 	_prompt_for_new_game_directory()
@@ -205,3 +218,8 @@ func _on_map_viewer_pressed() -> void:
 ## Called when the user chooses to open the model viewer.
 func _on_model_viewer_pressed() -> void:
 	_launch_model_viewer()
+
+
+## Called when the user chooses to open the sprite viewer.
+func _on_sprite_viewer_pressed() -> void:
+	_launch_sprite_viewer()

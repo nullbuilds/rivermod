@@ -15,9 +15,10 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Rivermod"
-config/version="0.1.0"
+config/version="0.2.0"
 run/main_scene="uid://cvimecsakv0jv"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [display]
@@ -52,9 +53,7 @@ camera_zoom_out={
 
 help_link="https://github.com/nullbuilds/rivermod/wiki/Rivermod-help"
 author_link="https://nullbuilds.github.io/"
-github_link="https://github.com/nullbuilds/rivermod/tree/main"
+github_link="https://github.com/nullbuilds/rivermod"
 modding_resources_link="https://github.com/nullbuilds/rivermod/wiki/Modding-resources"
-copyright="2025 Null Builds (Charles)"
+copyright="2026 Null Builds (Charles)"
 usage_credits=PackedStringArray("Kenney game assets (https://kenney.nl/assets)", "Wireframe Shader by Melisek (https://godotshaders.com/shader/wireframe-shader/)", "Noraml Shader by ualac (https://www.reddit.com/r/godot/comments/te4bmc/comment/i0nygem/)", "SHARD NOISE by ENDESGA (https://www.shadertoy.com/view/dlKyWw)", "Noise - Gabor - 2D shader - Deriv by iq (https://www.shadertoy.com/view/clGyWm)")
-external_tools_directory="tools"
-external_tools_directory.debug="export/windows/tools"

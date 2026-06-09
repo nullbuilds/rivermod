@@ -22,6 +22,7 @@ var _game_directory: String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	title = "Map Viewer"
 	own_world_3d = true
 	
 	_script_select_option_button.item_selected.connect(_on_script_select_button_item_selected)

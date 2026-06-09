@@ -1,22 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0m0sa3tvqccl"]
+[gd_scene format=3 uid="uid://b0m0sa3tvqccl"]
 
 [ext_resource type="Script" uid="uid://dhx76vu2lcv6l" path="res://scenes/ui/main_menu_bar/main_menu_bar.gd" id="1_sivsr"]
 
-[node name="MainMenuBar" type="MarginContainer"]
+[node name="MainMenuBar" type="MarginContainer" unique_id=1831372250]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
 script = ExtResource("1_sivsr")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2062328127]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="PanelContainer"]
+[node name="MenuBar" type="MenuBar" parent="PanelContainer" unique_id=1109711275]
 layout_mode = 2
 flat = true
 
-[node name="EditorPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
+[node name="EditorPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar" unique_id=1147874773]
 unique_name_in_owner = true
 title = "Editor"
 item_count = 2
@@ -25,16 +25,18 @@ item_0/id = 0
 item_1/text = "Configure..."
 item_1/id = 1
 
-[node name="ToolsPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
+[node name="ToolsPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar" unique_id=1379994466]
 unique_name_in_owner = true
 title = "Tools"
-item_count = 2
+item_count = 3
 item_0/text = "Map Viewer"
 item_0/id = 0
 item_1/text = "Model Viewer"
 item_1/id = 1
+item_2/text = "Sprite Viewer"
+item_2/id = 2
 
-[node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar"]
+[node name="HelpPopupMenu" type="PopupMenu" parent="PanelContainer/MenuBar" unique_id=415212142]
 unique_name_in_owner = true
 title = "Help"
 item_count = 3
