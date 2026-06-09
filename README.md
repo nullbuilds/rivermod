@@ -25,6 +25,7 @@ Check out the project [wiki] for tons of resources including:
 * Save game manager with automatic backups
 * Map viewer
 * Model viewer
+* Sprite/font viewer
 
 ## Planned features
 
